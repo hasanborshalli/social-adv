@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\PrivacyStatus;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,6 +24,7 @@ class PostFactory extends Factory
             'body' => fake()->paragraph(),
             'media_path' => null,
             'media_type' => null,
+            'privacy_status' => PrivacyStatus::Public,
         ];
     }
 
@@ -45,6 +47,16 @@ class PostFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'media_path' => 'posts/videos/'.fake()->uuid().'.mp4',
             'media_type' => 'video',
+        ]);
+    }
+
+    /**
+     * Indicate that the post is only visible to its author.
+     */
+    public function private(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'privacy_status' => PrivacyStatus::Private,
         ]);
     }
 
