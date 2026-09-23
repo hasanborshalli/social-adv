@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Manage your YouBee Social profile, account, privacy and notification preferences.">
+  <meta name="theme-color" content="#d97706">
+  <title>Settings · YouBee Social</title>
+
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <a class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2 z-3" href="#main">Skip to main content</a>
+
+  <!-- ===================== Top bar ===================== -->
+  <header class="app-header fixed-top">
+    <nav class="container-xxl h-100 d-flex align-items-center gap-2 gap-lg-3" aria-label="Primary">
+
+      <button class="icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navDrawer"
+              aria-controls="navDrawer" aria-label="Open navigation menu">
+        <i class="bi bi-list" aria-hidden="true"></i>
+      </button>
+
+      <a class="app-brand d-inline-flex align-items-center gap-2 text-decoration-none" href="index.html">
+        <img src="assets/img/logo.svg" alt="" width="34" height="34">
+        <span class="d-none d-sm-inline">YouBee</span>
+      </a>
+
+      <form class="header-search flex-grow-1 d-none d-md-block" role="search" action="#" method="get">
+        <label class="visually-hidden" for="globalSearch">Search YouBee</label>
+        <div class="input-group">
+          <span class="input-group-text" id="globalSearchIcon"><i class="bi bi-search" aria-hidden="true"></i></span>
+          <input type="search" class="form-control" id="globalSearch" name="q"
+                 placeholder="Search people and posts" aria-describedby="globalSearchIcon">
+        </div>
+      </form>
+
+      <div class="d-flex align-items-center gap-1 gap-sm-2 ms-auto">
+        <button class="icon-btn d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#searchDrawer"
+                aria-controls="searchDrawer" aria-label="Search"><i class="bi bi-search" aria-hidden="true"></i></button>
+        <a class="icon-btn d-none d-lg-inline-flex" href="index.html" title="Feed" aria-label="Feed"><i class="bi bi-house-door" aria-hidden="true"></i></a>
+        <a class="icon-btn d-none d-lg-inline-flex" href="friends.html" title="Friends" aria-label="Friends, 2 requests">
+          <i class="bi bi-people" aria-hidden="true"></i><span class="icon-btn__badge">2</span>
+        </a>
+        <a class="icon-btn" href="messages.html" title="Messages" aria-label="Messages, 2 unread">
+          <i class="bi bi-chat-dots" aria-hidden="true"></i><span class="icon-btn__badge">2</span>
+        </a>
+        <div class="dropdown">
+          <button class="icon-btn" type="button" data-bs-toggle="dropdown" data-bs-display="static"
+                  data-bs-auto-close="outside" aria-expanded="false" aria-label="Notifications, 3 unread">
+            <i class="bi bi-bell" aria-hidden="true"></i><span class="icon-btn__badge">3</span>
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-end notif-menu shadow border-0 mt-2">
+            <div class="d-flex align-items-center justify-content-between gap-2 px-3 py-2 border-bottom">
+              <span class="fw-semibold">Notifications</span>
+              <button class="btn btn-sm btn-light" type="button">
+                <i class="bi bi-check2-all me-1" aria-hidden="true"></i>Mark all as read
+              </button>
+            </div>
+
+            <div class="notif-menu__list">
+              <a class="notification-item notification-item--unread align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-4.svg" alt="">
+                  <span class="notification-icon bg-primary"><i class="bi bi-person-plus-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Ali Ayoub</strong> sent you a friend request.</span>
+                  <small class="text-brand fw-semibold">18 minutes ago</small>
+                </span>
+                <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+              </a>
+
+              <a class="notification-item notification-item--unread align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-2.svg" alt="">
+                  <span class="notification-icon bg-primary"><i class="bi bi-hand-thumbs-up-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Ali Nahleh</strong> and 14 others liked your post.</span>
+                  <small class="text-brand fw-semibold">40 minutes ago</small>
+                </span>
+                <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+              </a>
+
+              <a class="notification-item notification-item--unread align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-3.svg" alt="">
+                  <span class="notification-icon bg-success"><i class="bi bi-chat-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Maysam Chaalan</strong> commented on your photo.</span>
+                  <small class="text-brand fw-semibold">1 hour ago</small>
+                </span>
+                <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+              </a>
+
+              <a class="notification-item align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-8.svg" alt="">
+                  <span class="notification-icon bg-danger"><i class="bi bi-hand-thumbs-up-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Haitham Ismail</strong> liked your photo in Studio work.</span>
+                  <small class="text-secondary">Yesterday</small>
+                </span>
+              </a>
+            </div>
+
+            <div class="border-top p-2">
+              <a class="btn btn-light w-100" href="notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="btn p-0 border-0 rounded-circle lh-1" type="button" data-bs-toggle="dropdown"
+                  data-bs-display="static" aria-expanded="false" aria-label="Account menu">
+            <img class="avatar" src="assets/img/avatar-1.svg" alt="Hasan Nahleh">
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu--wide shadow border-0 mt-2">
+            <li>
+              <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="profile.html">
+                <img class="avatar" src="assets/img/avatar-1.svg" alt="">
+                <span>
+                  <span class="d-block fw-semibold">Hasan Nahleh</span>
+                  <small class="text-secondary">See your profile</small>
+                </span>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item py-2" href="settings.html"><i class="bi bi-gear me-2" aria-hidden="true"></i>Settings &amp; privacy</a></li>
+            <li><a class="dropdown-item py-2" href="notifications.html"><i class="bi bi-bell me-2" aria-hidden="true"></i>Notification preferences</a></li>
+            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-bookmark me-2" aria-hidden="true"></i>Saved items</a></li>
+            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-question-circle me-2" aria-hidden="true"></i>Help &amp; support</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item py-2 text-danger" href="login.html"><i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Log out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== Mobile drawer ===================== -->
+  <div class="offcanvas offcanvas-start" role="dialog" tabindex="-1" id="navDrawer" aria-labelledby="navDrawerLabel">
+    <div class="offcanvas-header border-bottom">
+      <h2 class="offcanvas-title h6 mb-0 d-inline-flex align-items-center gap-2" id="navDrawerLabel">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28"> YouBee
+      </h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <a class="d-flex align-items-center gap-2 text-decoration-none text-body p-2 rounded hover-surface mb-2" href="profile.html">
+        <img class="avatar avatar-lg" src="assets/img/avatar-1.svg" alt="">
+        <span>
+          <span class="d-block fw-semibold">Hasan Nahleh</span>
+          <small class="text-secondary">@hasann</small>
+        </span>
+      </a>
+
+      <form class="mb-3 d-md-none" role="search" action="#" method="get">
+        <label class="visually-hidden" for="drawerSearch">Search YouBee</label>
+        <input type="search" class="form-control" id="drawerSearch" name="q" placeholder="Search YouBee">
+      </form>
+
+      <nav class="nav flex-column side-nav" aria-label="Sections">
+        <a class="nav-link" href="index.html"><i class="bi bi-house-door" aria-hidden="true"></i><span>Feed</span></a>
+        <a class="nav-link" href="profile.html"><i class="bi bi-person" aria-hidden="true"></i><span>Profile</span></a>
+        <a class="nav-link" href="friends.html"><i class="bi bi-people" aria-hidden="true"></i><span>Friends</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+        <a class="nav-link" href="messages.html"><i class="bi bi-chat-dots" aria-hidden="true"></i><span>Messages</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+        <a class="nav-link" href="notifications.html"><i class="bi bi-bell" aria-hidden="true"></i><span>Notifications</span><span class="badge rounded-pill text-bg-danger ms-auto">3<span class="visually-hidden"> new</span></span></a>
+        <a class="nav-link" href="profile.html#photos"><i class="bi bi-images" aria-hidden="true"></i><span>Photos</span></a>
+        <a class="nav-link" href="#"><i class="bi bi-bookmark" aria-hidden="true"></i><span>Saved</span></a>
+        <a class="nav-link active" href="settings.html" aria-current="page"><i class="bi bi-gear" aria-hidden="true"></i><span>Settings</span></a>
+      </nav>
+
+      <button class="btn btn-primary w-100 mt-3" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+        <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Create post
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== Mobile search drawer ===================== -->
+  <div class="offcanvas offcanvas-top d-md-none" role="dialog" tabindex="-1" id="searchDrawer" aria-labelledby="searchDrawerLabel">
+    <div class="offcanvas-header pb-2">
+      <h2 class="offcanvas-title h6 mb-0" id="searchDrawerLabel">Search</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body pt-0">
+      <form role="search" action="#" method="get">
+        <label class="visually-hidden" for="mobileSearch">Search YouBee</label>
+        <div class="input-group">
+          <span class="input-group-text" id="mobileSearchIcon"><i class="bi bi-search" aria-hidden="true"></i></span>
+          <input type="search" class="form-control" id="mobileSearch" name="q"
+                 placeholder="People and posts" aria-describedby="mobileSearchIcon" autocomplete="off">
+        </div>
+      </form>
+      <h3 class="side-nav__label mt-3 px-0">Recent</h3>
+      <ul class="list-unstyled mb-0 vstack gap-1">
+        <li><a class="d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-body hover-surface" href="profile.html"><i class="bi bi-clock-history text-secondary" aria-hidden="true"></i>Maysam Chaalan</a></li>
+        <li><a class="d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-body hover-surface" href="profile.html"><i class="bi bi-clock-history text-secondary" aria-hidden="true"></i>Ali Nahleh</a></li>
+        <li><a class="d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-body hover-surface" href="profile.html"><i class="bi bi-clock-history text-secondary" aria-hidden="true"></i>Ali Ayoub</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== Page ===================== -->
+  <div class="container-xxl app-shell">
+    <div class="row g-3">
+
+      <!-- ========== Left navigation rail ========== -->
+      <div class="col-lg-4 col-xl-3 d-none d-lg-block">
+        <div class="sticky-rail pb-3">
+
+          <a class="d-flex align-items-center gap-2 text-decoration-none text-body p-2 rounded hover-surface" href="profile.html">
+            <img class="avatar avatar-lg" src="assets/img/avatar-1.svg" alt="">
+            <span class="min-w-0">
+              <span class="d-block fw-semibold text-truncate">Hasan Nahleh</span>
+              <small class="text-secondary">Product designer</small>
+            </span>
+          </a>
+
+          <nav class="nav flex-column side-nav mt-2" aria-label="Sections">
+            <a class="nav-link" href="index.html"><i class="bi bi-house-door" aria-hidden="true"></i><span>Feed</span></a>
+            <a class="nav-link" href="profile.html"><i class="bi bi-person" aria-hidden="true"></i><span>Profile</span></a>
+            <a class="nav-link" href="friends.html"><i class="bi bi-people" aria-hidden="true"></i><span>Friends</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+            <a class="nav-link" href="messages.html"><i class="bi bi-chat-dots" aria-hidden="true"></i><span>Messages</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+            <a class="nav-link" href="notifications.html"><i class="bi bi-bell" aria-hidden="true"></i><span>Notifications</span><span class="badge rounded-pill text-bg-danger ms-auto">3<span class="visually-hidden"> new</span></span></a>
+            <a class="nav-link" href="profile.html#photos"><i class="bi bi-images" aria-hidden="true"></i><span>Photos</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-bookmark" aria-hidden="true"></i><span>Saved</span></a>
+            <a class="nav-link active" href="settings.html" aria-current="page"><i class="bi bi-gear" aria-hidden="true"></i><span>Settings</span></a>
+          </nav>
+
+          <button class="btn btn-primary w-100 mt-3" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+            <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Create post
+          </button>
+
+          <hr class="my-3">
+
+          <footer class="small text-secondary px-2">
+            <p class="mb-2">
+              <a class="link-muted" href="#">About</a> ·
+              <a class="link-muted" href="#">Privacy</a> ·
+              <a class="link-muted" href="#">Terms</a> ·
+              <a class="link-muted" href="#">Cookies</a> ·
+              <a class="link-muted" href="#">Help</a>
+            </p>
+            <p class="mb-0">© 2026 YouBee Social</p>
+          </footer>
+        </div>
+      </div>
+
+      <!-- ========== Settings ========== -->
+      <main class="col-12 col-lg-8 col-xl-9" id="main">
+        <h1 class="h4 mb-3">Settings &amp; privacy</h1>
+
+        <div class="row g-3">
+
+          <!-- ===== Settings sections ===== -->
+          <div class="col-12 col-md-4 col-xl-3">
+            <div class="card">
+              <div class="card-body">
+                <nav class="nav flex-column settings-nav" role="tablist" aria-label="Settings sections">
+                  <button class="nav-link active" id="tab-set-profile" data-bs-toggle="pill" data-bs-target="#panel-set-profile"
+                          type="button" role="tab" aria-controls="panel-set-profile" aria-selected="true">
+                    <i class="bi bi-person" aria-hidden="true"></i><span>Profile</span>
+                  </button>
+                  <button class="nav-link" id="tab-set-account" data-bs-toggle="pill" data-bs-target="#panel-set-account"
+                          type="button" role="tab" aria-controls="panel-set-account" aria-selected="false">
+                    <i class="bi bi-person-badge" aria-hidden="true"></i><span>Account</span>
+                  </button>
+                  <button class="nav-link" id="tab-set-privacy" data-bs-toggle="pill" data-bs-target="#panel-set-privacy"
+                          type="button" role="tab" aria-controls="panel-set-privacy" aria-selected="false">
+                    <i class="bi bi-lock" aria-hidden="true"></i><span>Privacy</span>
+                  </button>
+                  <button class="nav-link" id="tab-set-notifications" data-bs-toggle="pill" data-bs-target="#panel-set-notifications"
+                          type="button" role="tab" aria-controls="panel-set-notifications" aria-selected="false">
+                    <i class="bi bi-bell" aria-hidden="true"></i><span>Notifications</span>
+                  </button>
+                  <button class="nav-link" id="tab-set-blocking" data-bs-toggle="pill" data-bs-target="#panel-set-blocking"
+                          type="button" role="tab" aria-controls="panel-set-blocking" aria-selected="false">
+                    <i class="bi bi-slash-circle" aria-hidden="true"></i><span>Blocking</span>
+                  </button>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== Panels ===== -->
+          <div class="col-12 col-md-8 col-xl-9">
+            <div class="tab-content">
+
+              <!-- ========== Profile ========== -->
+              <div class="tab-pane fade show active" id="panel-set-profile" role="tabpanel" aria-labelledby="tab-set-profile" tabindex="0">
+                <form class="card" action="#" method="post" enctype="multipart/form-data">
+                  <div class="card-body">
+                    <h2 class="h5 mb-1">Profile</h2>
+                    <p class="text-secondary small mb-4">This is what people see when they open your profile.</p>
+
+                    <div class="setting-row">
+                      <div class="setting-row__text">
+                        <p class="fw-semibold mb-0">Profile picture</p>
+                        <p class="text-secondary small mb-0">Square images look best.</p>
+                      </div>
+                      <div class="setting-row__control d-flex align-items-center gap-3">
+                        <img class="avatar avatar-xl" src="assets/img/avatar-1.svg" alt="Your current profile picture">
+                        <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#changeAvatarModal">Change</button>
+                      </div>
+                    </div>
+
+                    <div class="setting-row">
+                      <div class="setting-row__text">
+                        <p class="fw-semibold mb-0">Cover photo</p>
+                        <p class="text-secondary small mb-0">Always public. 1600 × 500 px or larger.</p>
+                      </div>
+                      <div class="setting-row__control d-flex align-items-center gap-3">
+                        <img class="rounded object-fit-cover" src="assets/img/cover.svg" alt="Your current cover photo" width="120" height="38">
+                        <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#changeCoverModal">Change</button>
+                      </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="row g-3">
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setName">Display name</label>
+                        <input type="text" class="form-control" id="setName" name="name" value="Hasan Nahleh" required>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setUsername">Username</label>
+                        <div class="input-group">
+                          <span class="input-group-text">@</span>
+                          <input type="text" class="form-control" id="setUsername" name="username" value="hasann"
+                                 pattern="[a-zA-Z0-9_.]{3,30}" required>
+                        </div>
+                        <div class="form-text">Letters, numbers, dots and underscores. 3–30 characters.</div>
+                      </div>
+
+                      <div class="col-12">
+                        <label class="form-label" for="setBio">Bio</label>
+                        <textarea class="form-control" id="setBio" name="bio" rows="3" maxlength="160">Designing calmer software. Bikes, film cameras, and too many notebooks.</textarea>
+                        <div class="form-text">Up to 160 characters.</div>
+                      </div>
+
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setWork">Work</label>
+                        <input type="text" class="form-control" id="setWork" name="work" value="Product designer at Hivework">
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setEducation">Education</label>
+                        <input type="text" class="form-control" id="setEducation" name="education" value="Central Saint Martins">
+                      </div>
+
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setCity">Current city</label>
+                        <input type="text" class="form-control" id="setCity" name="city" value="Manchester, UK">
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setWebsite">Website</label>
+                        <input type="url" class="form-control" id="setWebsite" name="website" value="https://hasann.design">
+                      </div>
+
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setBirthday">Birthday</label>
+                        <input type="date" class="form-control" id="setBirthday" name="birthday" value="1993-04-22">
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setPronouns">Pronouns</label>
+                        <input type="text" class="form-control" id="setPronouns" name="pronouns" placeholder="e.g. they/them">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-footer bg-transparent d-flex justify-content-end gap-2 py-3">
+                    <button class="btn btn-light" type="reset">Cancel</button>
+                    <button class="btn btn-primary px-4" type="submit">Save changes</button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- ========== Account ========== -->
+              <div class="tab-pane fade" id="panel-set-account" role="tabpanel" aria-labelledby="tab-set-account" tabindex="0">
+
+                <form class="card mb-3" action="#" method="post">
+                  <div class="card-body">
+                    <h2 class="h5 mb-1">Account</h2>
+                    <p class="text-secondary small mb-4">Contact details and regional preferences.</p>
+
+                    <div class="row g-3">
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setEmail">Email address</label>
+                        <input type="email" class="form-control" id="setEmail" name="email" value="hasan@example.com" required>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setPhone">Mobile number</label>
+                        <input type="tel" class="form-control" id="setPhone" name="phone" value="+44 7700 900123">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer bg-transparent d-flex justify-content-end gap-2 py-3">
+                    <button class="btn btn-primary px-4" type="submit">Save changes</button>
+                  </div>
+                </form>
+
+                <form class="card mb-3" action="#" method="post">
+                  <div class="card-body">
+                    <h2 class="h6 mb-3">Change password</h2>
+                    <div class="row g-3">
+                      <div class="col-12">
+                        <label class="form-label" for="setCurrentPw">Current password</label>
+                        <input type="password" class="form-control" id="setCurrentPw" name="current_password" autocomplete="current-password" required>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setNewPw">New password</label>
+                        <input type="password" class="form-control" id="setNewPw" name="new_password" autocomplete="new-password" minlength="12" required>
+                        <div class="form-text">At least 12 characters.</div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <label class="form-label" for="setConfirmPw">Confirm new password</label>
+                        <input type="password" class="form-control" id="setConfirmPw" name="confirm_password" autocomplete="new-password" minlength="12" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer bg-transparent d-flex justify-content-end gap-2 py-3">
+                    <button class="btn btn-primary px-4" type="submit">Update password</button>
+                  </div>
+                </form>
+
+                <section class="card border-danger-subtle" aria-labelledby="dangerZoneHeading">
+                  <div class="card-body">
+                    <h2 class="h6 text-danger mb-3" id="dangerZoneHeading">Delete account</h2>
+                    <div class="setting-row pt-0">
+                      <div class="setting-row__text">
+                        <p class="fw-semibold mb-0">Delete account</p>
+                        <p class="text-secondary small mb-0">Permanently removes your posts, photos and messages after 30 days.</p>
+                      </div>
+                      <div class="setting-row__control">
+                        <button class="btn btn-outline-danger" type="button">Delete account</button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <!-- ========== Privacy ========== -->
+              <div class="tab-pane fade" id="panel-set-privacy" role="tabpanel" aria-labelledby="tab-set-privacy" tabindex="0">
+                <form class="card" action="#" method="post">
+                  <div class="card-body">
+                    <h2 class="h5 mb-1">Privacy</h2>
+                    <p class="text-secondary small mb-4">Decide who can find you and see what you share.</p>
+
+                    <div class="setting-row pt-0">
+                      <div class="setting-row__text">
+                        <label class="fw-semibold mb-0" for="privPosts">Who can see your future posts</label>
+                        <p class="text-secondary small mb-0">This becomes the default audience in the post composer.</p>
+                      </div>
+                      <div class="setting-row__control">
+                        <select class="form-select w-auto" id="privPosts" name="posts_audience">
+                          <option selected>Public</option>
+                          <option>Friends</option>
+                          <option>Friends except…</option>
+                          <option>Only me</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="setting-row">
+                      <div class="setting-row__text">
+                        <label class="fw-semibold mb-0" for="privRequests">Who can send you friend requests</label>
+                        <p class="text-secondary small mb-0">Limits who sees the Add friend button on your profile.</p>
+                      </div>
+                      <div class="setting-row__control">
+                        <select class="form-select w-auto" id="privRequests" name="request_audience">
+                          <option selected>Everyone</option>
+                          <option>Friends of friends</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="setting-row">
+                      <div class="setting-row__text">
+                        <p class="fw-semibold mb-0">Show when you're active</p>
+                        <p class="text-secondary small mb-0">Friends see a green dot next to your name.</p>
+                      </div>
+                      <div class="setting-row__control form-check form-switch m-0">
+                        <input class="form-check-input" type="checkbox" role="switch" id="privActiveStatus" name="active_status" checked>
+                        <label class="visually-hidden" for="privActiveStatus">Show when you're active</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-footer bg-transparent d-flex justify-content-end gap-2 py-3">
+                    <button class="btn btn-primary px-4" type="submit">Save changes</button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- ========== Notifications ========== -->
+              <div class="tab-pane fade" id="panel-set-notifications" role="tabpanel" aria-labelledby="tab-set-notifications" tabindex="0">
+                <form class="card" action="#" method="post">
+                  <div class="card-body">
+                    <h2 class="h5 mb-1">Notifications</h2>
+                    <p class="text-secondary small mb-4">Choose how each kind of update reaches you.</p>
+
+                    <div class="table-responsive">
+                      <table class="table align-middle mb-0">
+                        <caption class="visually-hidden">Notification delivery preferences by category</caption>
+                        <thead>
+                          <tr>
+                            <th scope="col">Activity</th>
+                            <th scope="col" class="text-center">Push</th>
+                            <th scope="col" class="text-center">Email</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row" class="fw-normal">Likes on your posts</th>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifReactPush" checked>
+                              <label class="visually-hidden" for="notifReactPush">Push notifications for likes</label>
+                            </td>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifReactEmail">
+                              <label class="visually-hidden" for="notifReactEmail">Email notifications for likes</label>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row" class="fw-normal">Comments and replies</th>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifCommentPush" checked>
+                              <label class="visually-hidden" for="notifCommentPush">Push notifications for comments</label>
+                            </td>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifCommentEmail" checked>
+                              <label class="visually-hidden" for="notifCommentEmail">Email notifications for comments</label>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row" class="fw-normal">Friend requests</th>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifFriendPush" checked>
+                              <label class="visually-hidden" for="notifFriendPush">Push notifications for friend requests</label>
+                            </td>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifFriendEmail" checked>
+                              <label class="visually-hidden" for="notifFriendEmail">Email notifications for friend requests</label>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row" class="fw-normal">Direct messages</th>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifMsgPush" checked>
+                              <label class="visually-hidden" for="notifMsgPush">Push notifications for messages</label>
+                            </td>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifMsgEmail">
+                              <label class="visually-hidden" for="notifMsgEmail">Email notifications for messages</label>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row" class="fw-normal">Birthdays</th>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifBdayPush">
+                              <label class="visually-hidden" for="notifBdayPush">Push notifications for birthdays</label>
+                            </td>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifBdayEmail" checked>
+                              <label class="visually-hidden" for="notifBdayEmail">Email notifications for birthdays</label>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row" class="fw-normal">Product news from YouBee</th>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifNewsPush">
+                              <label class="visually-hidden" for="notifNewsPush">Push notifications for product news</label>
+                            </td>
+                            <td class="text-center">
+                              <input class="form-check-input" type="checkbox" id="notifNewsEmail">
+                              <label class="visually-hidden" for="notifNewsEmail">Email notifications for product news</label>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="setting-row pt-0">
+                      <div class="setting-row__text">
+                        <p class="fw-semibold mb-0">Pause all notifications</p>
+                        <p class="text-secondary small mb-0">Nothing will reach you until the pause ends.</p>
+                      </div>
+                      <div class="setting-row__control">
+                        <label class="visually-hidden" for="notifPause">Pause all notifications for</label>
+                        <select class="form-select w-auto" id="notifPause" name="pause">
+                          <option selected>Off</option>
+                          <option>1 hour</option>
+                          <option>8 hours</option>
+                          <option>Until tomorrow</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-footer bg-transparent d-flex justify-content-end gap-2 py-3">
+                    <button class="btn btn-primary px-4" type="submit">Save changes</button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- ========== Blocking ========== -->
+              <div class="tab-pane fade" id="panel-set-blocking" role="tabpanel" aria-labelledby="tab-set-blocking" tabindex="0">
+                <section class="card" aria-labelledby="blockingHeading">
+                  <div class="card-body">
+                    <h2 class="h5 mb-1" id="blockingHeading">Blocking</h2>
+                    <p class="text-secondary small mb-4">
+                      Blocked people can't see your profile, message you or send you friend requests.
+                    </p>
+
+                    <form class="row g-2 align-items-end mb-4" action="#" method="post">
+                      <div class="col-12 col-sm">
+                        <label class="form-label" for="blockName">Block someone</label>
+                        <input type="text" class="form-control" id="blockName" name="block" placeholder="Type a name or username">
+                      </div>
+                      <div class="col-12 col-sm-auto">
+                        <button class="btn btn-outline-danger w-100" type="submit">Block</button>
+                      </div>
+                    </form>
+
+                    <h3 class="h6 text-secondary mb-2">Blocked accounts</h3>
+                    <ul class="list-unstyled vstack gap-1 mb-0">
+                      <li class="d-flex align-items-center gap-3 p-2 rounded hover-surface">
+                        <img class="avatar" src="assets/img/avatar-5.svg" alt="">
+                        <span class="flex-grow-1 min-w-0">
+                          <span class="d-block fw-semibold text-truncate">Spam Account</span>
+                          <small class="text-secondary">Blocked <time datetime="2026-06-02">2 June 2026</time></small>
+                        </span>
+                        <button class="btn btn-sm btn-light" type="button">Unblock</button>
+                      </li>
+                      <li class="d-flex align-items-center gap-3 p-2 rounded hover-surface">
+                        <img class="avatar" src="assets/img/avatar-7.svg" alt="">
+                        <span class="flex-grow-1 min-w-0">
+                          <span class="d-block fw-semibold text-truncate">Old Colleague</span>
+                          <small class="text-secondary">Blocked <time datetime="2025-11-18">18 November 2025</time></small>
+                        </span>
+                        <button class="btn btn-sm btn-light" type="button">Unblock</button>
+                      </li>
+                    </ul>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ===================== Change profile picture dialog ===================== -->
+  <div class="modal fade" role="dialog" id="changeAvatarModal" tabindex="-1" aria-labelledby="changeAvatarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <form class="modal-content" action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="changeAvatarLabel">Change profile picture</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body text-center">
+          <img class="avatar avatar-2xl profile-avatar mb-3" src="assets/img/avatar-1.svg" alt="Current profile picture">
+
+          <div class="dropzone position-relative mb-3">
+            <i class="bi bi-cloud-arrow-up fs-2" aria-hidden="true"></i>
+            <span class="fw-semibold text-body">Upload a new picture</span>
+            <small>Square images look best · at least 320 × 320 px</small>
+            <label class="visually-hidden" for="avatarFile">Upload a new profile picture</label>
+            <input type="file" id="avatarFile" name="avatar" accept="image/*">
+          </div>
+
+          <p class="divider-text mb-3">or pick a recent photo</p>
+
+          <fieldset>
+            <legend class="visually-hidden">Choose from your recent photos</legend>
+            <div class="row g-2 row-cols-4">
+              <div class="col"><a class="photo-tile" href="#"><img src="assets/img/photo-1.svg" alt="Use amber gradient study"></a></div>
+              <div class="col"><a class="photo-tile" href="#"><img src="assets/img/photo-3.svg" alt="Use green gradient study"></a></div>
+              <div class="col"><a class="photo-tile" href="#"><img src="assets/img/photo-5.svg" alt="Use violet gradient study"></a></div>
+              <div class="col"><a class="photo-tile" href="#"><img src="assets/img/photo-6.svg" alt="Use cyan gradient study"></a></div>
+            </div>
+          </fieldset>
+
+          <div class="form-check text-start mt-3">
+            <input class="form-check-input" type="checkbox" id="avatarAnnounce" name="announce" checked>
+            <label class="form-check-label" for="avatarAnnounce">Share the update to my feed</label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary px-4">Save picture</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== Change cover photo dialog ===================== -->
+  <div class="modal fade" role="dialog" id="changeCoverModal" tabindex="-1" aria-labelledby="changeCoverLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <form class="modal-content" action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="changeCoverLabel">Change cover photo</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <img class="cover rounded mb-3" src="assets/img/cover.svg" alt="Current cover photo">
+
+          <div class="dropzone position-relative">
+            <i class="bi bi-image fs-2" aria-hidden="true"></i>
+            <span class="fw-semibold text-body">Upload a new cover</span>
+            <small>Wide images work best · at least 1600 × 500 px</small>
+            <label class="visually-hidden" for="coverFile">Upload a new cover photo</label>
+            <input type="file" id="coverFile" name="cover" accept="image/*">
+          </div>
+
+          <div class="form-text mt-2">Your cover photo is public and visible to anyone who opens your profile.</div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light me-auto"><i class="bi bi-trash me-1" aria-hidden="true"></i>Remove</button>
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary px-4">Save cover</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== Mobile tab bar ===================== -->
+  <nav class="tab-bar d-lg-none" aria-label="Primary (compact)">
+    <a class="tab-bar__item" href="index.html"><i class="bi bi-house-door" aria-hidden="true"></i><span>Feed</span></a>
+    <a class="tab-bar__item" href="friends.html"><i class="bi bi-people" aria-hidden="true"></i><span>Friends</span></a>
+    <button class="tab-bar__item border-0 bg-transparent" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+      <i class="bi bi-plus-square text-brand" aria-hidden="true"></i><span>Post</span>
+    </button>
+    <a class="tab-bar__item" href="messages.html"><i class="bi bi-chat-dots" aria-hidden="true"></i><span>Chats</span></a>
+    <a class="tab-bar__item" href="notifications.html"><i class="bi bi-bell" aria-hidden="true"></i><span>Alerts</span></a>
+  </nav>  <!-- ===================== Create post dialog ===================== -->
+  <div class="modal fade" role="dialog" id="createPostModal" tabindex="-1" aria-labelledby="createPostLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <form class="modal-content" action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="createPostLabel">Create post</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <img class="avatar" src="assets/img/avatar-1.svg" alt="">
+            <div>
+              <p class="fw-semibold mb-1">Hasan Nahleh</p>
+              <label class="visually-hidden" for="postAudience">Who can see this post</label>
+              <select class="form-select form-select-sm w-auto" id="postAudience" name="audience">
+                <option value="public" selected>🌐 Public</option>
+                <option value="friends">👥 Friends</option>
+                <option value="friends-except">👥 Friends except…</option>
+                <option value="only-me">🔒 Only me</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="visually-hidden" for="postBody">Post text</label>
+          <textarea class="form-control border-0 fs-5 mb-3" id="postBody" name="body" rows="4"
+                    placeholder="What's on your mind, Hasan?"></textarea>
+
+          <div class="dropzone position-relative">
+            <i class="bi bi-image fs-2" aria-hidden="true"></i>
+            <span class="fw-semibold text-body">Add a photo or video</span>
+            <small>One file per post · or drag and drop it here</small>
+            <label class="visually-hidden" for="postMedia">Attach a photo or video</label>
+            <input type="file" id="postMedia" name="media" accept="image/*,video/*">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Save draft</button>
+          <button type="submit" class="btn btn-primary px-4">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== Upload photos dialog ===================== -->
+  <div class="modal fade" role="dialog" id="uploadPhotoModal" tabindex="-1" aria-labelledby="uploadPhotoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <form class="modal-content" action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="uploadPhotoLabel">Upload a photo</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="dropzone position-relative mb-3">
+            <i class="bi bi-cloud-arrow-up fs-2" aria-hidden="true"></i>
+            <span class="fw-semibold text-body">Choose a photo to upload</span>
+            <small>JPG, PNG, GIF or WebP · up to 20 MB</small>
+            <label class="visually-hidden" for="photoFiles">Choose a photo</label>
+            <input type="file" id="photoFiles" name="photo" accept="image/*" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="photoAlbum">Album</label>
+            <select class="form-select" id="photoAlbum" name="album">
+              <option value="timeline" selected>Timeline photos</option>
+              <option value="travel">Travel 2026</option>
+              <option value="studio">Studio work</option>
+              <option value="new">➕ Create new album…</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="photoCaption">Caption</label>
+            <textarea class="form-control" id="photoCaption" name="caption" rows="2" placeholder="Say something about this photo…"></textarea>
+          </div>
+
+          <div class="mb-1">
+            <label class="form-label" for="photoAlt">Alternative text</label>
+            <input type="text" class="form-control" id="photoAlt" name="alt" placeholder="Describe the photo for screen readers">
+            <div class="form-text">Good alt text keeps your photos readable for everyone.</div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary px-4">Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>

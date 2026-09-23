@@ -1,0 +1,60 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<Post>
+ */
+class PostFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'user_id' => User::factory(),
+            'body' => fake()->paragraph(),
+            'media_path' => null,
+            'media_type' => null,
+        ];
+    }
+
+    /**
+     * Indicate that the post has an attached image.
+     */
+    public function withImage(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'media_path' => 'posts/images/'.fake()->uuid().'.jpg',
+            'media_type' => 'image',
+        ]);
+    }
+
+    /**
+     * Indicate that the post has an attached video.
+     */
+    public function withVideo(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'media_path' => 'posts/videos/'.fake()->uuid().'.mp4',
+            'media_type' => 'video',
+        ]);
+    }
+
+    /**
+     * Indicate that the post has no text body.
+     */
+    public function withoutBody(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'body' => null,
+        ]);
+    }
+}

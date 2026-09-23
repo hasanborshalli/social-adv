@@ -1,0 +1,735 @@
+@charset "UTF-8";
+/* =============================================================================
+   YouBee Social — theme layer
+   -----------------------------------------------------------------------------
+   A deliberately small stylesheet that sits on top of Bootstrap 5.
+   Everything Bootstrap can already do is done with utility classes in the HTML;
+   this file only covers what utilities cannot express.
+
+   CONTENTS
+     1.  Design tokens
+     2.  Base & typography
+     3.  Bootstrap brand overrides
+     4.  App shell & layout
+     5.  Top navigation
+     6.  Side navigation
+     7.  Mobile tab bar
+     8.  Avatars & presence
+     9.  Cards, posts & reactions
+     10. Post media
+     11. Composer
+     12. Profile
+     13. Messages
+     14. Notifications
+     15. People & friends
+     16. Settings
+     17. Auth pages
+     18. Helpers
+     19. Motion, focus & print
+   ========================================================================== */
+
+
+/* 1. Design tokens ========================================================= */
+
+:root {
+  /* Brand */
+  --yb-honey:        #d97706;
+  --yb-honey-rgb:    217, 119, 6;
+  --yb-honey-dark:   #b45309;
+  --yb-honey-soft:   #fef3c7;
+  --yb-ink:          #1f2937;
+
+  /* Metrics */
+  --yb-header-h:     60px;
+  --yb-tabbar-h:     58px;
+  --yb-gutter:       1rem;
+  --yb-radius:       .85rem;
+  --yb-radius-sm:    .6rem;
+
+  /* Elevation */
+  --yb-shadow-sm:    0 1px 2px rgba(15, 23, 42, .06), 0 1px 3px rgba(15, 23, 42, .04);
+  --yb-shadow:       0 4px 16px rgba(15, 23, 42, .08);
+
+  /* Bootstrap surface tuning */
+  --bs-body-bg:      #f1f2f6;
+  --bs-body-color:   #22272f;
+  --bs-border-color: #e3e6ec;
+  --bs-link-color-rgb: var(--yb-honey-rgb);
+  --bs-link-hover-color-rgb: 180, 83, 9;
+  --bs-border-radius:    var(--yb-radius-sm);
+  --bs-border-radius-lg: var(--yb-radius);
+}
+
+
+/* 2. Base & typography ===================================================== */
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { letter-spacing: -.01em; }
+
+/* Stretch a small element's click target over its whole card / list row. */
+.stretched-link::after { border-radius: inherit; }
+
+
+/* 3. Bootstrap brand overrides ============================================= */
+
+.btn-primary {
+  --bs-btn-bg:              var(--yb-honey);
+  --bs-btn-border-color:    var(--yb-honey);
+  --bs-btn-hover-bg:        var(--yb-honey-dark);
+  --bs-btn-hover-border-color: var(--yb-honey-dark);
+  --bs-btn-active-bg:       var(--yb-honey-dark);
+  --bs-btn-active-border-color: var(--yb-honey-dark);
+  --bs-btn-disabled-bg:     var(--yb-honey);
+  --bs-btn-disabled-border-color: var(--yb-honey);
+}
+
+.btn-outline-primary {
+  --bs-btn-color:           var(--yb-honey-dark);
+  --bs-btn-border-color:    var(--yb-honey);
+  --bs-btn-hover-bg:        var(--yb-honey);
+  --bs-btn-hover-border-color: var(--yb-honey);
+  --bs-btn-active-bg:       var(--yb-honey-dark);
+  --bs-btn-active-border-color: var(--yb-honey-dark);
+}
+
+.text-brand    { color: var(--yb-honey-dark) !important; }
+.bg-brand      { background-color: var(--yb-honey) !important; }
+.bg-brand-soft { background-color: var(--yb-honey-soft) !important; }
+
+.form-check-input:checked { background-color: var(--yb-honey); border-color: var(--yb-honey); }
+.form-switch .form-check-input:focus { border-color: rgba(var(--yb-honey-rgb), .5); }
+.form-control:focus, .form-select:focus, .form-check-input:focus {
+  border-color: rgba(var(--yb-honey-rgb), .55);
+  box-shadow: 0 0 0 .2rem rgba(var(--yb-honey-rgb), .2);
+}
+
+.nav-pills { --bs-nav-pills-link-active-bg: var(--yb-honey); }
+
+
+/* 4. App shell & layout ==================================================== */
+
+.app-shell { padding-top: calc(var(--yb-header-h) + var(--yb-gutter)); }
+
+/* Clears the fixed mobile tab bar so the last card is never trapped under it. */
+@media (max-width: 991.98px) {
+  .app-shell { padding-bottom: calc(var(--yb-tabbar-h) + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* Columns that ride along with the page until they run out of content. */
+.sticky-rail {
+  position: sticky;
+  top: calc(var(--yb-header-h) + var(--yb-gutter));
+  max-height: calc(100vh - var(--yb-header-h) - var(--yb-gutter) * 2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.sticky-rail::-webkit-scrollbar { width: 6px; }
+.sticky-rail::-webkit-scrollbar-thumb { background: var(--bs-border-color); border-radius: 3px; }
+
+/* Panels that fill the viewport instead of the page — used by Messages. */
+.full-height-panel {
+  height: calc(100vh - var(--yb-header-h) - var(--yb-gutter) * 2);
+  min-height: 32rem;
+}
+@media (max-width: 991.98px) {
+  .full-height-panel {
+    height: calc(100vh - var(--yb-header-h) - var(--yb-tabbar-h) - var(--yb-gutter));
+    min-height: 26rem;
+  }
+}
+
+
+/* 5. Top navigation ======================================================== */
+
+.app-header {
+  height: var(--yb-header-h);
+  background: #fff;
+  border-bottom: 1px solid var(--bs-border-color);
+  box-shadow: var(--yb-shadow-sm);
+}
+
+.app-brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -.02em;
+  color: var(--yb-ink);
+}
+.app-brand:hover { color: var(--yb-honey-dark); }
+
+/* Icon buttons in the header, and their unread counters. */
+.icon-btn {
+  --size: 42px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size);
+  height: var(--size);
+  border: 0;
+  border-radius: 50%;
+  font-size: 1.15rem;
+  color: var(--bs-secondary-color);
+  background: var(--bs-tertiary-bg);
+  transition: background-color .15s ease, color .15s ease;
+}
+.icon-btn:hover,
+.icon-btn:focus-visible { background: var(--yb-honey-soft); color: var(--yb-honey-dark); }
+.icon-btn.active { background: var(--yb-honey); color: #fff; }
+
+/* Circular icon button that KEEPS its .btn-* colours. Use this instead of
+   stacking .icon-btn on a .btn-primary — .icon-btn paints its own neutral
+   background and would win on source order. */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.625rem;
+  height: 2.625rem;
+  padding: 0;
+  flex: 0 0 auto;
+}
+
+/* Notifications panel hanging off the navbar bell. */
+.notif-menu {
+  width: min(23rem, calc(100vw - 1.5rem));
+  padding: 0;
+  overflow: hidden;
+}
+.notif-menu__list {
+  max-height: min(60vh, 26rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: .35rem;
+}
+.notif-menu .notification-item { padding: .55rem .65rem; }
+
+.icon-btn__badge {
+  position: absolute;
+  top: -2px;
+  inset-inline-end: -2px;
+  min-width: 1.1rem;
+  padding: 0 .3rem;
+  font-size: .68rem;
+  line-height: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--bs-danger);
+  border: 2px solid #fff;
+  border-radius: 1rem;
+}
+
+/* Search field that collapses to an icon-only affordance on small screens. */
+.header-search { max-width: 22rem; }
+.header-search .form-control {
+  background: var(--bs-tertiary-bg);
+  border-color: transparent;
+  border-start-start-radius: 2rem;
+  border-end-start-radius: 2rem;
+}
+.header-search .input-group-text {
+  background: var(--bs-tertiary-bg);
+  border-color: transparent;
+  color: var(--bs-secondary-color);
+  border-start-start-radius: 2rem;
+  border-end-start-radius: 2rem;
+}
+.header-search .form-control { border-start-end-radius: 2rem; border-end-end-radius: 2rem; }
+
+/* The compact search panel sizes to its content instead of Bootstrap's 30vh. */
+#searchDrawer { height: auto; }
+
+
+/* 6. Side navigation ======================================================= */
+
+.side-nav .nav-link {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .6rem .7rem;
+  border-radius: var(--yb-radius-sm);
+  font-weight: 500;
+  color: var(--bs-body-color);
+}
+.side-nav .nav-link:hover { background: rgba(var(--yb-honey-rgb), .08); }
+.side-nav .nav-link.active {
+  background: var(--yb-honey-soft);
+  color: var(--yb-honey-dark);
+  font-weight: 600;
+}
+.side-nav .nav-link > i { font-size: 1.2rem; width: 1.4rem; text-align: center; }
+
+.side-nav__label {
+  padding: .25rem .7rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--bs-secondary-color);
+}
+
+
+/* 7. Mobile tab bar ======================================================== */
+
+.tab-bar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 1030;
+  height: calc(var(--yb-tabbar-h) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  display: flex;
+  background: #fff;
+  border-top: 1px solid var(--bs-border-color);
+}
+.tab-bar__item {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .1rem;
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--bs-secondary-color);
+  text-decoration: none;
+}
+.tab-bar__item > i { font-size: 1.3rem; }
+.tab-bar__item.active { color: var(--yb-honey-dark); }
+
+
+/* 8. Avatars & presence ==================================================== */
+
+.avatar {
+  --size: 2.5rem;
+  flex: 0 0 auto;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bs-tertiary-bg);
+}
+.avatar-xs  { --size: 1.75rem; }
+.avatar-sm  { --size: 2rem; }
+.avatar-lg  { --size: 3.25rem; }
+.avatar-xl  { --size: 5rem; }
+.avatar-2xl { --size: 8.5rem; }
+
+.avatar-stack { display: flex; }
+.avatar-stack > .avatar { border: 2px solid #fff; }
+.avatar-stack > .avatar + .avatar { margin-inline-start: -.6rem; }
+
+.presence { position: relative; display: inline-flex; }
+.presence__dot {
+  position: absolute;
+  inset-inline-end: 0;
+  bottom: 0;
+  width: .8rem;
+  height: .8rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--bs-gray-400);
+}
+.presence--online  .presence__dot { background: #22c55e; }
+.presence--away    .presence__dot { background: #f59e0b; }
+
+
+/* 9. Cards, posts & reactions ============================================== */
+
+.card {
+  border-color: transparent;
+  border-radius: var(--yb-radius);
+  box-shadow: var(--yb-shadow-sm);
+}
+
+.post-actions .btn {
+  --bs-btn-color: var(--bs-secondary-color);
+  --bs-btn-hover-color: var(--yb-honey-dark);
+  --bs-btn-hover-bg: rgba(var(--yb-honey-rgb), .08);
+  --bs-btn-active-color: var(--yb-honey-dark);
+  --bs-btn-active-bg: rgba(var(--yb-honey-rgb), .14);
+  --bs-btn-border-color: transparent;
+  font-weight: 600;
+}
+
+/* Comment bubble under a post. */
+.comment-bubble {
+  padding: .5rem .8rem;
+  background: var(--bs-tertiary-bg);
+  border-radius: 1rem;
+}
+
+/* Replies nested under a comment, with a thread line down the left. */
+.comment-replies {
+  margin-inline-start: .5rem;
+  padding-inline-start: .75rem;
+  border-inline-start: 2px solid var(--bs-border-color);
+}
+
+
+
+/* 10. Post media ========================================================== */
+
+/* A post carries at most one photo. */
+.post-photo {
+  display: block;
+  background: var(--bs-tertiary-bg);
+}
+.post-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+/* Square photo tiles used on the profile Photos tab. */
+.photo-tile {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: var(--yb-radius-sm);
+  overflow: hidden;
+}
+.photo-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+}
+.photo-tile:hover img { transform: scale(1.05); }
+
+
+/* 11. Composer ============================================================= */
+
+/* The read-only "What's on your mind?" control that opens the post modal. */
+.composer-trigger {
+  flex: 1 1 auto;
+  padding: .65rem 1rem;
+  text-align: start;
+  color: var(--bs-secondary-color);
+  background: var(--bs-tertiary-bg);
+  border: 0;
+  border-radius: 2rem;
+}
+.composer-trigger:hover { background: var(--bs-secondary-bg); }
+
+/* Dashed dropzone inside the upload modals. */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--bs-secondary-color);
+  border: 2px dashed var(--bs-border-color);
+  border-radius: var(--yb-radius-sm);
+  background: var(--bs-tertiary-bg);
+  cursor: pointer;
+}
+.dropzone:hover { border-color: var(--yb-honey); color: var(--yb-honey-dark); }
+/* The file input covers the dropzone so the whole area is clickable — no JS. */
+.dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+/* 12. Profile ============================================================== */
+
+.cover {
+  width: 100%;
+  aspect-ratio: 16 / 5;
+  min-height: 9rem;
+  max-height: 20rem;
+  object-fit: cover;
+}
+
+.profile-avatar {
+  border: 4px solid #fff;
+  box-shadow: var(--yb-shadow);
+}
+
+/* The avatar rides up over the cover on wide screens. It needs its own stacking
+   context, or the cover image (a positioned earlier sibling) paints over the
+   identity block behind it. */
+.profile-avatar-wrap { z-index: 1; }
+
+@media (min-width: 768px) {
+  .profile-avatar-wrap { margin-top: -4.5rem; }
+}
+
+.profile-tabs .nav-link {
+  padding: .85rem 1.1rem;
+  font-weight: 600;
+  color: var(--bs-secondary-color);
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+}
+.profile-tabs .nav-link:hover { color: var(--yb-honey-dark); }
+.profile-tabs .nav-link.active {
+  color: var(--yb-honey-dark);
+  background: transparent;
+  border-bottom-color: var(--yb-honey);
+}
+
+.stat-block { line-height: 1.2; }
+.stat-block > strong { display: block; font-size: 1.15rem; }
+
+
+/* 13. Messages ============================================================= */
+
+.conversation-list .list-group-item {
+  border: 0;
+  border-radius: var(--yb-radius-sm);
+  padding: .65rem .75rem;
+}
+.conversation-list .list-group-item + .list-group-item { margin-top: .15rem; }
+.conversation-list .list-group-item.active {
+  background: var(--yb-honey-soft);
+  color: var(--bs-body-color);
+}
+.conversation-list .list-group-item.active .text-secondary { color: var(--yb-honey-dark) !important; }
+
+/* The conversation list is a drawer on phones and a static column from md up
+   (Bootstrap's .offcanvas-md). These rules keep it a scrollable flex column in
+   both states, which the responsive offcanvas styles would otherwise undo. */
+#conversationDrawer { height: 100%; --bs-offcanvas-width: 20rem; }
+#conversationDrawer .offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0;
+  overflow: hidden;
+}
+
+.chat-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(var(--yb-honey-rgb), .06), transparent 42%),
+    radial-gradient(circle at 88% 82%, rgba(var(--yb-honey-rgb), .05), transparent 42%);
+}
+
+.msg { display: flex; gap: .5rem; max-width: min(80%, 34rem); }
+.msg + .msg { margin-top: .5rem; }
+.msg__bubble {
+  padding: .5rem .85rem;
+  border-radius: 1.15rem;
+  background: #fff;
+  box-shadow: var(--yb-shadow-sm);
+  overflow-wrap: anywhere;
+}
+.msg--in  .msg__bubble { border-end-start-radius: .3rem; }
+.msg--out { margin-inline-start: auto; flex-direction: row-reverse; }
+.msg--out .msg__bubble {
+  color: #fff;
+  background: var(--yb-honey);
+  border-end-end-radius: .3rem;
+  box-shadow: none;
+}
+.msg__meta { font-size: .7rem; color: var(--bs-secondary-color); }
+
+/* Three-dot typing indicator (pure CSS animation). */
+.typing { display: inline-flex; gap: .2rem; align-items: center; }
+.typing > span {
+  width: .35rem;
+  height: .35rem;
+  border-radius: 50%;
+  background: var(--bs-secondary-color);
+  animation: yb-typing 1.2s infinite ease-in-out;
+}
+.typing > span:nth-child(2) { animation-delay: .15s; }
+.typing > span:nth-child(3) { animation-delay: .3s; }
+@keyframes yb-typing {
+  0%, 60%, 100% { opacity: .3; transform: translateY(0); }
+  30%           { opacity: 1;  transform: translateY(-.2rem); }
+}
+
+
+/* 14. Notifications ======================================================== */
+
+.notification-item {
+  display: flex;
+  gap: .85rem;
+  padding: .85rem 1rem;
+  border: 0;
+  border-radius: var(--yb-radius-sm);
+}
+.notification-item:hover { background: var(--bs-tertiary-bg); }
+.notification-item--unread { background: rgba(var(--yb-honey-rgb), .07); }
+.notification-item--unread:hover { background: rgba(var(--yb-honey-rgb), .12); }
+
+/* Small coloured glyph pinned to the corner of the actor's avatar. */
+.notification-icon {
+  position: absolute;
+  inset-inline-end: -.25rem;
+  bottom: -.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  font-size: .72rem;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.unread-dot {
+  width: .6rem;
+  height: .6rem;
+  border-radius: 50%;
+  background: var(--yb-honey);
+}
+
+
+/* 15. People & friends ===================================================== */
+
+.person-card { height: 100%; text-align: center; }
+.person-card .card-body { display: flex; flex-direction: column; align-items: center; }
+.person-card .btn { width: 100%; }
+
+.mutuals { font-size: .8rem; color: var(--bs-secondary-color); }
+
+
+/* 16. Settings ============================================================= */
+
+.settings-nav .nav-link {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .65rem .8rem;
+  border-radius: var(--yb-radius-sm);
+  font-weight: 500;
+  color: var(--bs-body-color);
+  text-align: start;
+}
+.settings-nav .nav-link:hover { background: var(--bs-tertiary-bg); }
+.settings-nav .nav-link.active {
+  background: var(--yb-honey-soft);
+  color: var(--yb-honey-dark);
+  font-weight: 600;
+}
+.settings-nav .nav-link > i { font-size: 1.1rem; width: 1.25rem; text-align: center; }
+
+/* A labelled row with a control on the right; stacks on narrow screens. */
+.setting-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: .9rem 0;
+}
+.setting-row + .setting-row { border-top: 1px solid var(--bs-border-color); }
+.setting-row__text { flex: 1 1 18rem; min-width: 0; }
+.setting-row__control { flex: 0 0 auto; }
+
+
+/* 17. Auth pages ========================================================== */
+
+/* Log in / register sit outside the app shell: no header, rail or tab bar. */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(var(--yb-honey-rgb), .18), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(var(--yb-honey-rgb), .12), transparent 45%),
+    var(--bs-body-bg);
+}
+
+.auth-pitch { max-width: 30rem; }
+
+.auth-pitch__title {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  color: var(--yb-honey-dark);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 28rem;
+  border-radius: var(--yb-radius);
+  box-shadow: var(--yb-shadow);
+}
+
+/* Password fields pair an input with a reveal button; keep them flush. */
+.auth-card .form-control { padding-block: .65rem; }
+
+/* 18. Helpers ============================================================== */
+
+.hover-surface { transition: background-color .15s ease; }
+.hover-surface:hover { background: var(--bs-tertiary-bg); }
+
+.link-muted { color: var(--bs-secondary-color); text-decoration: none; }
+.link-muted:hover { color: var(--yb-honey-dark); text-decoration: underline; }
+
+.divider-text {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  font-size: .8rem;
+  color: var(--bs-secondary-color);
+}
+.divider-text::before,
+.divider-text::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--bs-border-color);
+}
+
+.text-balance { text-wrap: balance; }
+
+/* Clamp a paragraph to N lines: <p class="clamp-2"> */
+.clamp-1, .clamp-2, .clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.clamp-1 { -webkit-line-clamp: 1; }
+.clamp-2 { -webkit-line-clamp: 2; }
+.clamp-3 { -webkit-line-clamp: 3; }
+
+
+.dropdown-menu--wide { min-width: 16rem; }
+
+/* Lets a flex child shrink far enough for .text-truncate to take effect. */
+.min-w-0 { min-width: 0; }
+
+/* 19. Motion, focus & print ================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--yb-honey-dark);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .app-header, .tab-bar, .sticky-rail, .post-actions, .composer-trigger { display: none !important; }
+  .app-shell { padding-top: 0; }
+  .card { box-shadow: none; border: 1px solid #ccc; }
+}

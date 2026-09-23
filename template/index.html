@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="YouBee Social — your feed of posts, photos and updates from friends.">
+  <meta name="theme-color" content="#d97706">
+  <title>Feed · YouBee Social</title>
+
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <a class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2 z-3" href="#main">Skip to main content</a>
+
+  <!-- ===================== Top bar ===================== -->
+  <header class="app-header fixed-top">
+    <nav class="container-xxl h-100 d-flex align-items-center gap-2 gap-lg-3" aria-label="Primary">
+
+      <button class="icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navDrawer"
+              aria-controls="navDrawer" aria-label="Open navigation menu">
+        <i class="bi bi-list" aria-hidden="true"></i>
+      </button>
+
+      <a class="app-brand d-inline-flex align-items-center gap-2 text-decoration-none" href="index.html">
+        <img src="assets/img/logo.svg" alt="" width="34" height="34">
+        <span class="d-none d-sm-inline">YouBee</span>
+      </a>
+
+      <form class="header-search flex-grow-1 d-none d-md-block" role="search" action="#" method="get">
+        <label class="visually-hidden" for="globalSearch">Search YouBee</label>
+        <div class="input-group">
+          <span class="input-group-text" id="globalSearchIcon"><i class="bi bi-search" aria-hidden="true"></i></span>
+          <input type="search" class="form-control" id="globalSearch" name="q"
+                 placeholder="Search people and posts" aria-describedby="globalSearchIcon">
+        </div>
+      </form>
+
+      <div class="d-flex align-items-center gap-1 gap-sm-2 ms-auto">
+        <button class="icon-btn d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#searchDrawer"
+                aria-controls="searchDrawer" aria-label="Search"><i class="bi bi-search" aria-hidden="true"></i></button>
+        <a class="icon-btn d-none d-lg-inline-flex active" href="index.html" title="Feed" aria-label="Feed"><i class="bi bi-house-door" aria-hidden="true"></i></a>
+        <a class="icon-btn d-none d-lg-inline-flex" href="friends.html" title="Friends" aria-label="Friends, 2 requests">
+          <i class="bi bi-people" aria-hidden="true"></i><span class="icon-btn__badge">2</span>
+        </a>
+        <a class="icon-btn" href="messages.html" title="Messages" aria-label="Messages, 2 unread">
+          <i class="bi bi-chat-dots" aria-hidden="true"></i><span class="icon-btn__badge">2</span>
+        </a>
+        <div class="dropdown">
+          <button class="icon-btn" type="button" data-bs-toggle="dropdown" data-bs-display="static"
+                  data-bs-auto-close="outside" aria-expanded="false" aria-label="Notifications, 3 unread">
+            <i class="bi bi-bell" aria-hidden="true"></i><span class="icon-btn__badge">3</span>
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-end notif-menu shadow border-0 mt-2">
+            <div class="d-flex align-items-center justify-content-between gap-2 px-3 py-2 border-bottom">
+              <span class="fw-semibold">Notifications</span>
+              <button class="btn btn-sm btn-light" type="button">
+                <i class="bi bi-check2-all me-1" aria-hidden="true"></i>Mark all as read
+              </button>
+            </div>
+
+            <div class="notif-menu__list">
+              <a class="notification-item notification-item--unread align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-4.svg" alt="">
+                  <span class="notification-icon bg-primary"><i class="bi bi-person-plus-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Ali Ayoub</strong> sent you a friend request.</span>
+                  <small class="text-brand fw-semibold">18 minutes ago</small>
+                </span>
+                <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+              </a>
+
+              <a class="notification-item notification-item--unread align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-2.svg" alt="">
+                  <span class="notification-icon bg-primary"><i class="bi bi-hand-thumbs-up-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Ali Nahleh</strong> and 14 others liked your post.</span>
+                  <small class="text-brand fw-semibold">40 minutes ago</small>
+                </span>
+                <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+              </a>
+
+              <a class="notification-item notification-item--unread align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-3.svg" alt="">
+                  <span class="notification-icon bg-success"><i class="bi bi-chat-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Maysam Chaalan</strong> commented on your photo.</span>
+                  <small class="text-brand fw-semibold">1 hour ago</small>
+                </span>
+                <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+              </a>
+
+              <a class="notification-item align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-8.svg" alt="">
+                  <span class="notification-icon bg-danger"><i class="bi bi-hand-thumbs-up-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Haitham Ismail</strong> liked your photo in Studio work.</span>
+                  <small class="text-secondary">Yesterday</small>
+                </span>
+              </a>
+            </div>
+
+            <div class="border-top p-2">
+              <a class="btn btn-light w-100" href="notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="btn p-0 border-0 rounded-circle lh-1" type="button" data-bs-toggle="dropdown"
+                  data-bs-display="static" aria-expanded="false" aria-label="Account menu">
+            <img class="avatar" src="assets/img/avatar-1.svg" alt="Hasan Nahleh">
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu--wide shadow border-0 mt-2">
+            <li>
+              <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="profile.html">
+                <img class="avatar" src="assets/img/avatar-1.svg" alt="">
+                <span>
+                  <span class="d-block fw-semibold">Hasan Nahleh</span>
+                  <small class="text-secondary">See your profile</small>
+                </span>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item py-2" href="settings.html"><i class="bi bi-gear me-2" aria-hidden="true"></i>Settings &amp; privacy</a></li>
+            <li><a class="dropdown-item py-2" href="notifications.html"><i class="bi bi-bell me-2" aria-hidden="true"></i>Notification preferences</a></li>
+            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-bookmark me-2" aria-hidden="true"></i>Saved items</a></li>
+            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-question-circle me-2" aria-hidden="true"></i>Help &amp; support</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item py-2 text-danger" href="login.html"><i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Log out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== Mobile drawer ===================== -->
+  <div class="offcanvas offcanvas-start" role="dialog" tabindex="-1" id="navDrawer" aria-labelledby="navDrawerLabel">
+    <div class="offcanvas-header border-bottom">
+      <h2 class="offcanvas-title h6 mb-0 d-inline-flex align-items-center gap-2" id="navDrawerLabel">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28"> YouBee
+      </h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <a class="d-flex align-items-center gap-2 text-decoration-none text-body p-2 rounded hover-surface mb-2" href="profile.html">
+        <img class="avatar avatar-lg" src="assets/img/avatar-1.svg" alt="">
+        <span>
+          <span class="d-block fw-semibold">Hasan Nahleh</span>
+          <small class="text-secondary">@hasann</small>
+        </span>
+      </a>
+
+      <form class="mb-3 d-md-none" role="search" action="#" method="get">
+        <label class="visually-hidden" for="drawerSearch">Search YouBee</label>
+        <input type="search" class="form-control" id="drawerSearch" name="q" placeholder="Search YouBee">
+      </form>
+
+      <nav class="nav flex-column side-nav" aria-label="Sections">
+        <a class="nav-link active" href="index.html" aria-current="page"><i class="bi bi-house-door" aria-hidden="true"></i><span>Feed</span></a>
+        <a class="nav-link" href="profile.html"><i class="bi bi-person" aria-hidden="true"></i><span>Profile</span></a>
+        <a class="nav-link" href="friends.html"><i class="bi bi-people" aria-hidden="true"></i><span>Friends</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+        <a class="nav-link" href="messages.html"><i class="bi bi-chat-dots" aria-hidden="true"></i><span>Messages</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+        <a class="nav-link" href="notifications.html"><i class="bi bi-bell" aria-hidden="true"></i><span>Notifications</span><span class="badge rounded-pill text-bg-danger ms-auto">3<span class="visually-hidden"> new</span></span></a>
+        <a class="nav-link" href="profile.html#photos"><i class="bi bi-images" aria-hidden="true"></i><span>Photos</span></a>
+        <a class="nav-link" href="#"><i class="bi bi-bookmark" aria-hidden="true"></i><span>Saved</span></a>
+        <a class="nav-link" href="settings.html"><i class="bi bi-gear" aria-hidden="true"></i><span>Settings</span></a>
+      </nav>
+
+      <button class="btn btn-primary w-100 mt-3" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+        <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Create post
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== Mobile search drawer ===================== -->
+  <div class="offcanvas offcanvas-top d-md-none" role="dialog" tabindex="-1" id="searchDrawer" aria-labelledby="searchDrawerLabel">
+    <div class="offcanvas-header pb-2">
+      <h2 class="offcanvas-title h6 mb-0" id="searchDrawerLabel">Search</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body pt-0">
+      <form role="search" action="#" method="get">
+        <label class="visually-hidden" for="mobileSearch">Search YouBee</label>
+        <div class="input-group">
+          <span class="input-group-text" id="mobileSearchIcon"><i class="bi bi-search" aria-hidden="true"></i></span>
+          <input type="search" class="form-control" id="mobileSearch" name="q"
+                 placeholder="People and posts" aria-describedby="mobileSearchIcon" autocomplete="off">
+        </div>
+      </form>
+      <h3 class="side-nav__label mt-3 px-0">Recent</h3>
+      <ul class="list-unstyled mb-0 vstack gap-1">
+        <li><a class="d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-body hover-surface" href="profile.html"><i class="bi bi-clock-history text-secondary" aria-hidden="true"></i>Maysam Chaalan</a></li>
+        <li><a class="d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-body hover-surface" href="profile.html"><i class="bi bi-clock-history text-secondary" aria-hidden="true"></i>Ali Nahleh</a></li>
+        <li><a class="d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-body hover-surface" href="profile.html"><i class="bi bi-clock-history text-secondary" aria-hidden="true"></i>Ali Ayoub</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== Page ===================== -->
+  <div class="container-xxl app-shell">
+    <div class="row g-3">
+
+      <!-- ========== Left navigation rail ========== -->
+      <div class="col-lg-4 col-xl-3 d-none d-lg-block">
+        <div class="sticky-rail pb-3">
+
+          <a class="d-flex align-items-center gap-2 text-decoration-none text-body p-2 rounded hover-surface" href="profile.html">
+            <img class="avatar avatar-lg" src="assets/img/avatar-1.svg" alt="">
+            <span class="min-w-0">
+              <span class="d-block fw-semibold text-truncate">Hasan Nahleh</span>
+              <small class="text-secondary">Product designer</small>
+            </span>
+          </a>
+
+          <nav class="nav flex-column side-nav mt-2" aria-label="Sections">
+            <a class="nav-link active" href="index.html" aria-current="page"><i class="bi bi-house-door" aria-hidden="true"></i><span>Feed</span></a>
+            <a class="nav-link" href="profile.html"><i class="bi bi-person" aria-hidden="true"></i><span>Profile</span></a>
+            <a class="nav-link" href="friends.html"><i class="bi bi-people" aria-hidden="true"></i><span>Friends</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+            <a class="nav-link" href="messages.html"><i class="bi bi-chat-dots" aria-hidden="true"></i><span>Messages</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+            <a class="nav-link" href="notifications.html"><i class="bi bi-bell" aria-hidden="true"></i><span>Notifications</span><span class="badge rounded-pill text-bg-danger ms-auto">3<span class="visually-hidden"> new</span></span></a>
+            <a class="nav-link" href="profile.html#photos"><i class="bi bi-images" aria-hidden="true"></i><span>Photos</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-bookmark" aria-hidden="true"></i><span>Saved</span></a>
+            <a class="nav-link" href="settings.html"><i class="bi bi-gear" aria-hidden="true"></i><span>Settings</span></a>
+          </nav>
+
+          <button class="btn btn-primary w-100 mt-3" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+            <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Create post
+          </button>
+
+          <hr class="my-3">
+
+          <footer class="small text-secondary px-2">
+            <p class="mb-2">
+              <a class="link-muted" href="#">About</a> ·
+              <a class="link-muted" href="#">Privacy</a> ·
+              <a class="link-muted" href="#">Terms</a> ·
+              <a class="link-muted" href="#">Cookies</a> ·
+              <a class="link-muted" href="#">Help</a>
+            </p>
+            <p class="mb-0">© 2026 YouBee Social</p>
+          </footer>
+        </div>
+      </div>
+
+      <!-- ========== Feed ========== -->
+      <main class="col-12 col-lg-8 col-xl-6" id="main">
+        <h1 class="visually-hidden">Your feed</h1>
+
+        <!-- Composer -->
+        <section class="card mb-3" aria-labelledby="composerHeading">
+          <div class="card-body">
+            <h2 class="visually-hidden" id="composerHeading">Create a post</h2>
+            <div class="d-flex align-items-center gap-2">
+              <img class="avatar" src="assets/img/avatar-1.svg" alt="">
+              <button class="composer-trigger" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                What's on your mind, Hasan?
+              </button>
+            </div>
+            <hr class="my-3">
+            <div class="d-flex flex-wrap gap-1">
+              <button class="btn btn-light flex-fill" type="button" data-bs-toggle="modal" data-bs-target="#uploadPhotoModal">
+                <i class="bi bi-image text-success me-1" aria-hidden="true"></i>Photo
+              </button>
+              <button class="btn btn-light flex-fill" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                <i class="bi bi-camera-video text-danger me-1" aria-hidden="true"></i>Video
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Feed sort -->
+        <div class="d-flex align-items-center justify-content-between mb-2 px-1">
+          <h2 class="h6 text-secondary mb-0">Your feed</h2>
+          <div class="dropdown">
+            <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-sliders me-1" aria-hidden="true"></i>Most recent
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+              <li><button class="dropdown-item active" type="button">Most recent</button></li>
+              <li><button class="dropdown-item" type="button">Top posts</button></li>
+              <li><button class="dropdown-item" type="button">Friends only</button></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ========== Post: two photos ========== -->
+        <article class="card mb-3">
+          <h2 class="visually-hidden">Post by Ali Nahleh</h2>
+          <div class="card-body pb-2">
+            <header class="d-flex align-items-start gap-2 mb-2">
+              <a href="profile.html"><img class="avatar" src="assets/img/avatar-2.svg" alt="Ali Nahleh"></a>
+              <div class="flex-grow-1 min-w-0">
+                <p class="mb-0">
+                  <a class="fw-semibold text-body text-decoration-none" href="profile.html">Ali Nahleh</a>
+                </p>
+                <p class="small text-secondary mb-0">
+                  <time datetime="2026-09-14T08:20">2 hours ago</time> ·
+                  <i class="bi bi-globe-americas" aria-hidden="true"></i> Public
+                </p>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-light border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Post options">
+                  <i class="bi bi-three-dots" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                  <li><button class="dropdown-item" type="button"><i class="bi bi-bookmark me-2" aria-hidden="true"></i>Save post</button></li>
+                  <li><button class="dropdown-item" type="button"><i class="bi bi-bell-slash me-2" aria-hidden="true"></i>Turn off notifications</button></li>
+                  <li><button class="dropdown-item" type="button"><i class="bi bi-eye-slash me-2" aria-hidden="true"></i>Hide post</button></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-flag me-2" aria-hidden="true"></i>Report</button></li>
+                </ul>
+              </div>
+            </header>
+            <p class="mb-0">
+              Three days of tiles, trams and custard tarts. The light here does half the work for you. ☀️
+            </p>
+          </div>
+
+          <a class="post-photo" href="#">
+            <img src="assets/img/photo-2.svg" alt="Sunlit tiled facade in Lisbon">
+          </a>
+
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between small text-secondary">
+              <span>
+                <span>128 likes</span>
+              </span>
+              <span><a class="link-muted" href="#">24 comments</a> · <a class="link-muted" href="#">6 shares</a></span>
+            </div>
+
+            <hr class="my-2">
+
+            <div class="btn-group w-100 post-actions" role="group" aria-label="Post actions">
+              <button class="btn" type="button"><i class="bi bi-hand-thumbs-up me-1" aria-hidden="true"></i>Like</button>
+              <button class="btn" type="button"><i class="bi bi-chat me-1" aria-hidden="true"></i>Comment</button>
+              <button class="btn" type="button"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
+            </div>
+
+            <hr class="my-2">
+
+            <ul class="list-unstyled mb-3 vstack gap-2">
+              <li class="d-flex gap-2">
+                <img class="avatar avatar-sm" src="assets/img/avatar-3.svg" alt="">
+                <div class="min-w-0 flex-grow-1">
+                  <div class="comment-bubble">
+                    <a class="fw-semibold small text-body text-decoration-none d-block" href="profile.html">Maysam Chaalan</a>
+                    <span class="small">That second shot is unreal. Which lens?</span>
+                  </div>
+                  <div class="small text-secondary mt-1 ms-2">
+                    <a class="link-muted fw-semibold" href="#">Like</a> ·
+                    <a class="link-muted fw-semibold" href="#">Reply</a> ·
+                    <time datetime="2026-09-14T09:05">1 h</time>
+                  </div>
+
+                  <!-- Replies to this comment -->
+                  <ul class="list-unstyled comment-replies mt-2 vstack gap-2">
+                    <li class="d-flex gap-2">
+                      <img class="avatar avatar-xs" src="assets/img/avatar-2.svg" alt="">
+                      <div class="min-w-0">
+                        <div class="comment-bubble">
+                          <a class="fw-semibold small text-body text-decoration-none d-block" href="profile.html">Ali Nahleh</a>
+                          <span class="small">35mm, wide open. Barely had to edit it.</span>
+                        </div>
+                        <div class="small text-secondary mt-1 ms-2">
+                          <a class="link-muted fw-semibold" href="#">Like</a> ·
+                          <a class="link-muted fw-semibold" href="#">Reply</a> ·
+                          <time datetime="2026-09-14T09:18">52 min</time>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="d-flex gap-2">
+                      <img class="avatar avatar-xs" src="assets/img/avatar-3.svg" alt="">
+                      <div class="min-w-0">
+                        <div class="comment-bubble">
+                          <a class="fw-semibold small text-body text-decoration-none d-block" href="profile.html">Maysam Chaalan</a>
+                          <span class="small">Knew it. Thanks!</span>
+                        </div>
+                        <div class="small text-secondary mt-1 ms-2">
+                          <a class="link-muted fw-semibold" href="#">Like</a> ·
+                          <a class="link-muted fw-semibold" href="#">Reply</a> ·
+                          <time datetime="2026-09-14T09:22">48 min</time>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <form class="d-flex align-items-center gap-2" action="#" method="post">
+                        <img class="avatar avatar-xs" src="assets/img/avatar-1.svg" alt="">
+                        <label class="visually-hidden" for="reply-comment-1">Reply to Maysam Chaalan</label>
+                        <input type="text" class="form-control form-control-sm rounded-pill" id="reply-comment-1"
+                               name="reply" placeholder="Write a reply…">
+                        <button class="btn btn-sm btn-light rounded-circle" type="submit" aria-label="Send reply">
+                          <i class="bi bi-send" aria-hidden="true"></i>
+                        </button>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="d-flex gap-2">
+                <img class="avatar avatar-sm" src="assets/img/avatar-8.svg" alt="">
+                <div class="min-w-0">
+                  <div class="comment-bubble">
+                    <a class="fw-semibold small text-body text-decoration-none d-block" href="profile.html">Haitham Ismail</a>
+                    <span class="small">Adding Lisbon to the list. Any café recommendations?</span>
+                  </div>
+                  <div class="small text-secondary mt-1 ms-2">
+                    <a class="link-muted fw-semibold" href="#">Like</a> ·
+                    <a class="link-muted fw-semibold" href="#">Reply</a> ·
+                    <time datetime="2026-09-14T09:40">35 min</time>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <form class="d-flex align-items-center gap-2" action="#" method="post">
+              <img class="avatar avatar-sm" src="assets/img/avatar-1.svg" alt="">
+              <label class="visually-hidden" for="comment-post-1">Write a comment on Ali Nahleh's post</label>
+              <input type="text" class="form-control rounded-pill" id="comment-post-1" name="comment" placeholder="Write a comment…">
+              <button class="btn btn-primary rounded-circle btn-icon" type="submit" aria-label="Send comment">
+                <i class="bi bi-send" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </article>
+
+        <!-- ========== Post: text only ========== -->
+        <article class="card mb-3">
+          <h2 class="visually-hidden">Post by Elias Al Omar</h2>
+          <div class="card-body pb-2">
+            <header class="d-flex align-items-start gap-2 mb-2">
+              <a href="profile.html"><img class="avatar" src="assets/img/avatar-7.svg" alt="Elias Al Omar"></a>
+              <div class="flex-grow-1 min-w-0">
+                <p class="mb-0"><a class="fw-semibold text-body text-decoration-none" href="profile.html">Elias Al Omar</a></p>
+                <p class="small text-secondary mb-0">
+                  <time datetime="2026-09-14T06:10">4 hours ago</time> ·
+                  <i class="bi bi-people-fill" aria-hidden="true"></i> Friends
+                </p>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-light border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Post options">
+                  <i class="bi bi-three-dots" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                  <li><button class="dropdown-item" type="button"><i class="bi bi-bookmark me-2" aria-hidden="true"></i>Save post</button></li>
+                  <li><button class="dropdown-item" type="button"><i class="bi bi-eye-slash me-2" aria-hidden="true"></i>Hide post</button></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-flag me-2" aria-hidden="true"></i>Report</button></li>
+                </ul>
+              </div>
+            </header>
+            <p class="fs-5 mb-0">
+              Shipped the new onboarding flow after six weeks. Drop-off is down 18%. Turns out the fix was
+              deleting two screens, not adding a tooltip. 🐝
+            </p>
+          </div>
+
+          <div class="card-body pt-3">
+            <div class="d-flex align-items-center justify-content-between small text-secondary">
+              <span>
+                <span>92 likes</span>
+              </span>
+              <span><a class="link-muted" href="#">11 comments</a></span>
+            </div>
+
+            <hr class="my-2">
+
+            <div class="btn-group w-100 post-actions" role="group" aria-label="Post actions">
+              <button class="btn" type="button"><i class="bi bi-hand-thumbs-up me-1" aria-hidden="true"></i>Like</button>
+              <button class="btn" type="button"><i class="bi bi-chat me-1" aria-hidden="true"></i>Comment</button>
+              <button class="btn" type="button"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
+            </div>
+
+            <hr class="my-2">
+
+            <form class="d-flex align-items-center gap-2" action="#" method="post">
+              <img class="avatar avatar-sm" src="assets/img/avatar-1.svg" alt="">
+              <label class="visually-hidden" for="comment-post-2">Write a comment on Elias Al Omar's post</label>
+              <input type="text" class="form-control rounded-pill" id="comment-post-2" name="comment" placeholder="Write a comment…">
+              <button class="btn btn-primary rounded-circle btn-icon" type="submit" aria-label="Send comment">
+                <i class="bi bi-send" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </article>
+
+        <!-- ========== Post: photo album (5 photos, 4 shown) ========== -->
+        <article class="card mb-3">
+          <h2 class="visually-hidden">Post by Maysam Chaalan</h2>
+          <div class="card-body pb-2">
+            <header class="d-flex align-items-start gap-2 mb-2">
+              <a href="profile.html"><img class="avatar" src="assets/img/avatar-3.svg" alt="Maysam Chaalan"></a>
+              <div class="flex-grow-1 min-w-0">
+                <p class="mb-0">
+                  <a class="fw-semibold text-body text-decoration-none" href="profile.html">Maysam Chaalan</a>
+                  <span class="text-secondary">added a photo to</span>
+                  <a class="text-body text-decoration-none fw-semibold" href="#">Studio work</a>
+                </p>
+                <p class="small text-secondary mb-0">
+                  <time datetime="2026-09-13T17:45">Yesterday at 17:45</time> ·
+                  <i class="bi bi-globe-americas" aria-hidden="true"></i> Public
+                </p>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-light border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Post options">
+                  <i class="bi bi-three-dots" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                  <li><button class="dropdown-item" type="button"><i class="bi bi-bookmark me-2" aria-hidden="true"></i>Save post</button></li>
+                  <li><button class="dropdown-item" type="button"><i class="bi bi-download me-2" aria-hidden="true"></i>Download album</button></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-flag me-2" aria-hidden="true"></i>Report</button></li>
+                </ul>
+              </div>
+            </header>
+            <p class="mb-0">Colour test for the autumn collection. This is the one that won. 🎨</p>
+          </div>
+
+          <a class="post-photo" href="#">
+            <img src="assets/img/photo-3.svg" alt="Green colour swatch test print">
+          </a>
+
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between small text-secondary">
+              <span>
+                <span>341 likes</span>
+              </span>
+              <span><a class="link-muted" href="#">47 comments</a> · <a class="link-muted" href="#">12 shares</a></span>
+            </div>
+
+            <hr class="my-2">
+
+            <div class="btn-group w-100 post-actions" role="group" aria-label="Post actions">
+              <button class="btn" type="button"><i class="bi bi-hand-thumbs-up me-1" aria-hidden="true"></i>Like</button>
+              <button class="btn" type="button"><i class="bi bi-chat me-1" aria-hidden="true"></i>Comment</button>
+              <button class="btn" type="button"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
+            </div>
+
+            <hr class="my-2">
+
+            <form class="d-flex align-items-center gap-2" action="#" method="post">
+              <img class="avatar avatar-sm" src="assets/img/avatar-1.svg" alt="">
+              <label class="visually-hidden" for="comment-post-3">Write a comment on Maysam Chaalan's post</label>
+              <input type="text" class="form-control rounded-pill" id="comment-post-3" name="comment" placeholder="Write a comment…">
+              <button class="btn btn-primary rounded-circle btn-icon" type="submit" aria-label="Send comment">
+                <i class="bi bi-send" aria-hidden="true"></i>
+              </button>
+            </form>
+          </div>
+        </article>
+
+        <!-- ========== Post: single photo ========== -->
+        <article class="card mb-3">
+          <h2 class="visually-hidden">Post by Haitham Ismail</h2>
+          <div class="card-body pb-2">
+            <header class="d-flex align-items-start gap-2 mb-2">
+              <a href="profile.html"><img class="avatar" src="assets/img/avatar-8.svg" alt="Haitham Ismail"></a>
+              <div class="flex-grow-1 min-w-0">
+                <p class="mb-0"><a class="fw-semibold text-body text-decoration-none" href="profile.html">Haitham Ismail</a></p>
+                <p class="small text-secondary mb-0">
+                  <time datetime="2026-09-13T08:02">Yesterday at 08:02</time> ·
+                  <i class="bi bi-globe-americas" aria-hidden="true"></i> Public
+                </p>
+              </div>
+              <div class="dropdown">
+                <button class="btn btn-sm btn-light border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Post options">
+                  <i class="bi bi-three-dots" aria-hidden="true"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                  <li><button class="dropdown-item" type="button"><i class="bi bi-bookmark me-2" aria-hidden="true"></i>Save post</button></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-flag me-2" aria-hidden="true"></i>Report</button></li>
+                </ul>
+              </div>
+            </header>
+            <p class="mb-0">First frost on the allotment. The kale survived, the basil did not.</p>
+          </div>
+
+          <a class="post-photo" href="#">
+            <img src="assets/img/photo-6.svg" alt="Frost covering allotment beds at dawn">
+          </a>
+
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between small text-secondary">
+              <span>
+                <span>57 likes</span>
+              </span>
+              <span><a class="link-muted" href="#">8 comments</a></span>
+            </div>
+
+            <hr class="my-2">
+
+            <div class="btn-group w-100 post-actions" role="group" aria-label="Post actions">
+              <button class="btn" type="button"><i class="bi bi-hand-thumbs-up me-1" aria-hidden="true"></i>Like</button>
+              <button class="btn" type="button"><i class="bi bi-chat me-1" aria-hidden="true"></i>Comment</button>
+              <button class="btn" type="button"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
+            </div>
+          </div>
+        </article>
+
+        <p class="text-center text-secondary small py-2 mb-0">You're all caught up ✨</p>
+      </main>
+
+      <!-- ========== Right rail ========== -->
+      <div class="col-xl-3 d-none d-xl-block">
+        <div class="sticky-rail pb-3">
+
+          <section class="card mb-3" aria-labelledby="suggestionsHeading">
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <h2 class="h6 mb-0" id="suggestionsHeading">People you may know</h2>
+                <a class="small link-muted" href="friends.html">See all</a>
+              </div>
+              <ul class="list-unstyled mb-0 vstack gap-3">
+                <li class="d-flex align-items-center gap-2">
+                  <img class="avatar" src="assets/img/avatar-4.svg" alt="">
+                  <div class="flex-grow-1 min-w-0">
+                    <p class="fw-semibold small mb-0 text-truncate">Ali Ayoub</p>
+                    <p class="mutuals mb-0 text-truncate">12 mutual friends</p>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary" type="button" aria-label="Add Ali Ayoub as a friend">
+                    <i class="bi bi-person-plus" aria-hidden="true"></i>
+                  </button>
+                </li>
+                <li class="d-flex align-items-center gap-2">
+                  <img class="avatar" src="assets/img/avatar-5.svg" alt="">
+                  <div class="flex-grow-1 min-w-0">
+                    <p class="fw-semibold small mb-0 text-truncate">Elie Amin</p>
+                    <p class="mutuals mb-0 text-truncate">5 mutual friends</p>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary" type="button" aria-label="Add Elie Amin as a friend">
+                    <i class="bi bi-person-plus" aria-hidden="true"></i>
+                  </button>
+                </li>
+                <li class="d-flex align-items-center gap-2">
+                  <img class="avatar" src="assets/img/avatar-6.svg" alt="">
+                  <div class="flex-grow-1 min-w-0">
+                    <p class="fw-semibold small mb-0 text-truncate">Baqer Alayyan</p>
+                    <p class="mutuals mb-0 text-truncate">3 mutual friends</p>
+                  </div>
+                  <button class="btn btn-sm btn-outline-primary" type="button" aria-label="Add Baqer Alayyan as a friend">
+                    <i class="bi bi-person-plus" aria-hidden="true"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="card mb-3" aria-labelledby="birthdaysHeading">
+            <div class="card-body d-flex align-items-start gap-3">
+              <i class="bi bi-gift fs-3 text-brand" aria-hidden="true"></i>
+              <div>
+                <h2 class="h6 mb-1" id="birthdaysHeading">Birthdays</h2>
+                <p class="small text-secondary mb-0">
+                  <strong class="text-body">Ali Nahleh</strong> and
+                  <strong class="text-body">2 others</strong> have birthdays today.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="contactsHeading">
+            <div class="card-body">
+              <h2 class="h6 mb-3" id="contactsHeading">Contacts</h2>
+              <ul class="list-unstyled mb-0 vstack gap-1">
+                <li>
+                  <a class="d-flex align-items-center gap-2 p-1 rounded text-decoration-none text-body hover-surface" href="messages.html">
+                    <span class="presence presence--online"><img class="avatar avatar-sm" src="assets/img/avatar-2.svg" alt=""><span class="presence__dot"></span></span>
+                    <span class="small fw-medium">Ali Nahleh</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="d-flex align-items-center gap-2 p-1 rounded text-decoration-none text-body hover-surface" href="messages.html">
+                    <span class="presence presence--online"><img class="avatar avatar-sm" src="assets/img/avatar-3.svg" alt=""><span class="presence__dot"></span></span>
+                    <span class="small fw-medium">Maysam Chaalan</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="d-flex align-items-center gap-2 p-1 rounded text-decoration-none text-body hover-surface" href="messages.html">
+                    <span class="presence presence--away"><img class="avatar avatar-sm" src="assets/img/avatar-7.svg" alt=""><span class="presence__dot"></span></span>
+                    <span class="small fw-medium">Elias Al Omar</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="d-flex align-items-center gap-2 p-1 rounded text-decoration-none text-body hover-surface" href="messages.html">
+                    <span class="presence"><img class="avatar avatar-sm" src="assets/img/avatar-8.svg" alt=""><span class="presence__dot"></span></span>
+                    <span class="small fw-medium">Haitham Ismail</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===================== Mobile tab bar ===================== -->
+  <nav class="tab-bar d-lg-none" aria-label="Primary (compact)">
+    <a class="tab-bar__item active" href="index.html"><i class="bi bi-house-door" aria-hidden="true"></i><span>Feed</span></a>
+    <a class="tab-bar__item" href="friends.html"><i class="bi bi-people" aria-hidden="true"></i><span>Friends</span></a>
+    <button class="tab-bar__item border-0 bg-transparent" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+      <i class="bi bi-plus-square text-brand" aria-hidden="true"></i><span>Post</span>
+    </button>
+    <a class="tab-bar__item" href="messages.html"><i class="bi bi-chat-dots" aria-hidden="true"></i><span>Chats</span></a>
+    <a class="tab-bar__item" href="notifications.html"><i class="bi bi-bell" aria-hidden="true"></i><span>Alerts</span></a>
+  </nav>  <!-- ===================== Create post dialog ===================== -->
+  <div class="modal fade" role="dialog" id="createPostModal" tabindex="-1" aria-labelledby="createPostLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <form class="modal-content" action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="createPostLabel">Create post</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <img class="avatar" src="assets/img/avatar-1.svg" alt="">
+            <div>
+              <p class="fw-semibold mb-1">Hasan Nahleh</p>
+              <label class="visually-hidden" for="postAudience">Who can see this post</label>
+              <select class="form-select form-select-sm w-auto" id="postAudience" name="audience">
+                <option value="public" selected>🌐 Public</option>
+                <option value="friends">👥 Friends</option>
+                <option value="friends-except">👥 Friends except…</option>
+                <option value="only-me">🔒 Only me</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="visually-hidden" for="postBody">Post text</label>
+          <textarea class="form-control border-0 fs-5 mb-3" id="postBody" name="body" rows="4"
+                    placeholder="What's on your mind, Hasan?"></textarea>
+
+          <div class="dropzone position-relative">
+            <i class="bi bi-image fs-2" aria-hidden="true"></i>
+            <span class="fw-semibold text-body">Add a photo or video</span>
+            <small>One file per post · or drag and drop it here</small>
+            <label class="visually-hidden" for="postMedia">Attach a photo or video</label>
+            <input type="file" id="postMedia" name="media" accept="image/*,video/*">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Save draft</button>
+          <button type="submit" class="btn btn-primary px-4">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== Upload photos dialog ===================== -->
+  <div class="modal fade" role="dialog" id="uploadPhotoModal" tabindex="-1" aria-labelledby="uploadPhotoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <form class="modal-content" action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="uploadPhotoLabel">Upload a photo</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="dropzone position-relative mb-3">
+            <i class="bi bi-cloud-arrow-up fs-2" aria-hidden="true"></i>
+            <span class="fw-semibold text-body">Choose a photo to upload</span>
+            <small>JPG, PNG, GIF or WebP · up to 20 MB</small>
+            <label class="visually-hidden" for="photoFiles">Choose a photo</label>
+            <input type="file" id="photoFiles" name="photo" accept="image/*" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="photoAlbum">Album</label>
+            <select class="form-select" id="photoAlbum" name="album">
+              <option value="timeline" selected>Timeline photos</option>
+              <option value="travel">Travel 2026</option>
+              <option value="studio">Studio work</option>
+              <option value="new">➕ Create new album…</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="photoCaption">Caption</label>
+            <textarea class="form-control" id="photoCaption" name="caption" rows="2" placeholder="Say something about this photo…"></textarea>
+          </div>
+
+          <div class="mb-1">
+            <label class="form-label" for="photoAlt">Alternative text</label>
+            <input type="text" class="form-control" id="photoAlt" name="alt" placeholder="Describe the photo for screen readers">
+            <div class="form-text">Good alt text keeps your photos readable for everyone.</div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary px-4">Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>

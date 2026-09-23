@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your YouBee Social conversations.">
+  <meta name="theme-color" content="#d97706">
+  <title>Messages · YouBee Social</title>
+
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <a class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2 z-3" href="#main">Skip to main content</a>
+
+  <!-- ===================== Top bar ===================== -->
+  <header class="app-header fixed-top">
+    <nav class="container-xxl h-100 d-flex align-items-center gap-2 gap-lg-3" aria-label="Primary">
+
+      <button class="icon-btn d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#navDrawer"
+              aria-controls="navDrawer" aria-label="Open navigation menu">
+        <i class="bi bi-list" aria-hidden="true"></i>
+      </button>
+
+      <a class="app-brand d-inline-flex align-items-center gap-2 text-decoration-none" href="index.html">
+        <img src="assets/img/logo.svg" alt="" width="34" height="34">
+        <span class="d-none d-sm-inline">YouBee</span>
+      </a>
+
+      <form class="header-search flex-grow-1 d-none d-md-block" role="search" action="#" method="get">
+        <label class="visually-hidden" for="globalSearch">Search YouBee</label>
+        <div class="input-group">
+          <span class="input-group-text" id="globalSearchIcon"><i class="bi bi-search" aria-hidden="true"></i></span>
+          <input type="search" class="form-control" id="globalSearch" name="q"
+                 placeholder="Search people and posts" aria-describedby="globalSearchIcon">
+        </div>
+      </form>
+
+      <div class="d-flex align-items-center gap-1 gap-sm-2 ms-auto">
+        <button class="icon-btn d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#searchDrawer"
+                aria-controls="searchDrawer" aria-label="Search"><i class="bi bi-search" aria-hidden="true"></i></button>
+        <a class="icon-btn d-none d-lg-inline-flex" href="index.html" title="Feed" aria-label="Feed"><i class="bi bi-house-door" aria-hidden="true"></i></a>
+        <a class="icon-btn d-none d-lg-inline-flex" href="friends.html" title="Friends" aria-label="Friends, 2 requests">
+          <i class="bi bi-people" aria-hidden="true"></i><span class="icon-btn__badge">2</span>
+        </a>
+        <a class="icon-btn active" href="messages.html" title="Messages" aria-label="Messages, 2 unread">
+          <i class="bi bi-chat-dots" aria-hidden="true"></i><span class="icon-btn__badge">2</span>
+        </a>
+        <div class="dropdown">
+          <button class="icon-btn" type="button" data-bs-toggle="dropdown" data-bs-display="static"
+                  data-bs-auto-close="outside" aria-expanded="false" aria-label="Notifications, 3 unread">
+            <i class="bi bi-bell" aria-hidden="true"></i><span class="icon-btn__badge">3</span>
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-end notif-menu shadow border-0 mt-2">
+            <div class="d-flex align-items-center justify-content-between gap-2 px-3 py-2 border-bottom">
+              <span class="fw-semibold">Notifications</span>
+              <button class="btn btn-sm btn-light" type="button">
+                <i class="bi bi-check2-all me-1" aria-hidden="true"></i>Mark all as read
+              </button>
+            </div>
+
+            <div class="notif-menu__list">
+              <a class="notification-item notification-item--unread align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-4.svg" alt="">
+                  <span class="notification-icon bg-primary"><i class="bi bi-person-plus-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Ali Ayoub</strong> sent you a friend request.</span>
+                  <small class="text-brand fw-semibold">18 minutes ago</small>
+                </span>
+                <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+              </a>
+
+              <a class="notification-item notification-item--unread align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-2.svg" alt="">
+                  <span class="notification-icon bg-primary"><i class="bi bi-hand-thumbs-up-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Ali Nahleh</strong> and 14 others liked your post.</span>
+                  <small class="text-brand fw-semibold">40 minutes ago</small>
+                </span>
+                <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+              </a>
+
+              <a class="notification-item notification-item--unread align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-3.svg" alt="">
+                  <span class="notification-icon bg-success"><i class="bi bi-chat-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Maysam Chaalan</strong> commented on your photo.</span>
+                  <small class="text-brand fw-semibold">1 hour ago</small>
+                </span>
+                <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+              </a>
+
+              <a class="notification-item align-items-center text-decoration-none text-body" href="notifications.html">
+                <span class="position-relative flex-shrink-0">
+                  <img class="avatar" src="assets/img/avatar-8.svg" alt="">
+                  <span class="notification-icon bg-danger"><i class="bi bi-hand-thumbs-up-fill" aria-hidden="true"></i></span>
+                </span>
+                <span class="flex-grow-1 min-w-0">
+                  <span class="d-block small clamp-2"><strong>Haitham Ismail</strong> liked your photo in Studio work.</span>
+                  <small class="text-secondary">Yesterday</small>
+                </span>
+              </a>
+            </div>
+
+            <div class="border-top p-2">
+              <a class="btn btn-light w-100" href="notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="btn p-0 border-0 rounded-circle lh-1" type="button" data-bs-toggle="dropdown"
+                  data-bs-display="static" aria-expanded="false" aria-label="Account menu">
+            <img class="avatar" src="assets/img/avatar-1.svg" alt="Hasan Nahleh">
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu--wide shadow border-0 mt-2">
+            <li>
+              <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="profile.html">
+                <img class="avatar" src="assets/img/avatar-1.svg" alt="">
+                <span>
+                  <span class="d-block fw-semibold">Hasan Nahleh</span>
+                  <small class="text-secondary">See your profile</small>
+                </span>
+              </a>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item py-2" href="settings.html"><i class="bi bi-gear me-2" aria-hidden="true"></i>Settings &amp; privacy</a></li>
+            <li><a class="dropdown-item py-2" href="notifications.html"><i class="bi bi-bell me-2" aria-hidden="true"></i>Notification preferences</a></li>
+            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-bookmark me-2" aria-hidden="true"></i>Saved items</a></li>
+            <li><a class="dropdown-item py-2" href="#"><i class="bi bi-question-circle me-2" aria-hidden="true"></i>Help &amp; support</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item py-2 text-danger" href="login.html"><i class="bi bi-box-arrow-right me-2" aria-hidden="true"></i>Log out</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== Mobile drawer ===================== -->
+  <div class="offcanvas offcanvas-start" role="dialog" tabindex="-1" id="navDrawer" aria-labelledby="navDrawerLabel">
+    <div class="offcanvas-header border-bottom">
+      <h2 class="offcanvas-title h6 mb-0 d-inline-flex align-items-center gap-2" id="navDrawerLabel">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28"> YouBee
+      </h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <a class="d-flex align-items-center gap-2 text-decoration-none text-body p-2 rounded hover-surface mb-2" href="profile.html">
+        <img class="avatar avatar-lg" src="assets/img/avatar-1.svg" alt="">
+        <span>
+          <span class="d-block fw-semibold">Hasan Nahleh</span>
+          <small class="text-secondary">@hasann</small>
+        </span>
+      </a>
+
+      <form class="mb-3 d-md-none" role="search" action="#" method="get">
+        <label class="visually-hidden" for="drawerSearch">Search YouBee</label>
+        <input type="search" class="form-control" id="drawerSearch" name="q" placeholder="Search YouBee">
+      </form>
+
+      <nav class="nav flex-column side-nav" aria-label="Sections">
+        <a class="nav-link" href="index.html"><i class="bi bi-house-door" aria-hidden="true"></i><span>Feed</span></a>
+        <a class="nav-link" href="profile.html"><i class="bi bi-person" aria-hidden="true"></i><span>Profile</span></a>
+        <a class="nav-link" href="friends.html"><i class="bi bi-people" aria-hidden="true"></i><span>Friends</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+        <a class="nav-link active" href="messages.html" aria-current="page"><i class="bi bi-chat-dots" aria-hidden="true"></i><span>Messages</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+        <a class="nav-link" href="notifications.html"><i class="bi bi-bell" aria-hidden="true"></i><span>Notifications</span><span class="badge rounded-pill text-bg-danger ms-auto">3<span class="visually-hidden"> new</span></span></a>
+        <a class="nav-link" href="profile.html#photos"><i class="bi bi-images" aria-hidden="true"></i><span>Photos</span></a>
+        <a class="nav-link" href="#"><i class="bi bi-bookmark" aria-hidden="true"></i><span>Saved</span></a>
+        <a class="nav-link" href="settings.html"><i class="bi bi-gear" aria-hidden="true"></i><span>Settings</span></a>
+      </nav>
+
+      <button class="btn btn-primary w-100 mt-3" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+        <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Create post
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== Mobile search drawer ===================== -->
+  <div class="offcanvas offcanvas-top d-md-none" role="dialog" tabindex="-1" id="searchDrawer" aria-labelledby="searchDrawerLabel">
+    <div class="offcanvas-header pb-2">
+      <h2 class="offcanvas-title h6 mb-0" id="searchDrawerLabel">Search</h2>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body pt-0">
+      <form role="search" action="#" method="get">
+        <label class="visually-hidden" for="mobileSearch">Search YouBee</label>
+        <div class="input-group">
+          <span class="input-group-text" id="mobileSearchIcon"><i class="bi bi-search" aria-hidden="true"></i></span>
+          <input type="search" class="form-control" id="mobileSearch" name="q"
+                 placeholder="People and posts" aria-describedby="mobileSearchIcon" autocomplete="off">
+        </div>
+      </form>
+      <h3 class="side-nav__label mt-3 px-0">Recent</h3>
+      <ul class="list-unstyled mb-0 vstack gap-1">
+        <li><a class="d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-body hover-surface" href="profile.html"><i class="bi bi-clock-history text-secondary" aria-hidden="true"></i>Maysam Chaalan</a></li>
+        <li><a class="d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-body hover-surface" href="profile.html"><i class="bi bi-clock-history text-secondary" aria-hidden="true"></i>Ali Nahleh</a></li>
+        <li><a class="d-flex align-items-center gap-2 p-2 rounded text-decoration-none text-body hover-surface" href="profile.html"><i class="bi bi-clock-history text-secondary" aria-hidden="true"></i>Ali Ayoub</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== Page ===================== -->
+  <div class="container-xxl app-shell">
+    <div class="row g-3">
+
+      <!-- ========== Left navigation rail ========== -->
+      <div class="col-lg-4 col-xl-3 d-none d-lg-block">
+        <div class="sticky-rail pb-3">
+
+          <a class="d-flex align-items-center gap-2 text-decoration-none text-body p-2 rounded hover-surface" href="profile.html">
+            <img class="avatar avatar-lg" src="assets/img/avatar-1.svg" alt="">
+            <span class="min-w-0">
+              <span class="d-block fw-semibold text-truncate">Hasan Nahleh</span>
+              <small class="text-secondary">Product designer</small>
+            </span>
+          </a>
+
+          <nav class="nav flex-column side-nav mt-2" aria-label="Sections">
+            <a class="nav-link" href="index.html"><i class="bi bi-house-door" aria-hidden="true"></i><span>Feed</span></a>
+            <a class="nav-link" href="profile.html"><i class="bi bi-person" aria-hidden="true"></i><span>Profile</span></a>
+            <a class="nav-link" href="friends.html"><i class="bi bi-people" aria-hidden="true"></i><span>Friends</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+            <a class="nav-link active" href="messages.html" aria-current="page"><i class="bi bi-chat-dots" aria-hidden="true"></i><span>Messages</span><span class="badge rounded-pill text-bg-danger ms-auto">2<span class="visually-hidden"> new</span></span></a>
+            <a class="nav-link" href="notifications.html"><i class="bi bi-bell" aria-hidden="true"></i><span>Notifications</span><span class="badge rounded-pill text-bg-danger ms-auto">3<span class="visually-hidden"> new</span></span></a>
+            <a class="nav-link" href="profile.html#photos"><i class="bi bi-images" aria-hidden="true"></i><span>Photos</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-bookmark" aria-hidden="true"></i><span>Saved</span></a>
+            <a class="nav-link" href="settings.html"><i class="bi bi-gear" aria-hidden="true"></i><span>Settings</span></a>
+          </nav>
+
+          <button class="btn btn-primary w-100 mt-3" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+            <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Create post
+          </button>
+
+          <hr class="my-3">
+
+          <footer class="small text-secondary px-2">
+            <p class="mb-2">
+              <a class="link-muted" href="#">About</a> ·
+              <a class="link-muted" href="#">Privacy</a> ·
+              <a class="link-muted" href="#">Terms</a> ·
+              <a class="link-muted" href="#">Cookies</a> ·
+              <a class="link-muted" href="#">Help</a>
+            </p>
+            <p class="mb-0">© 2026 YouBee Social</p>
+          </footer>
+        </div>
+      </div>
+
+      <!-- ========== Messages ========== -->
+      <main class="col-12 col-lg-8 col-xl-9" id="main">
+        <h1 class="visually-hidden">Messages</h1>
+
+        <div class="card full-height-panel overflow-hidden">
+          <div class="row g-0 h-100">
+
+            <!-- ===== Conversation list (drawer on phones, column from md up) ===== -->
+            <div class="col-md-5 col-lg-4 border-end h-100">
+              <div class="offcanvas-md offcanvas-start h-100" role="dialog" tabindex="-1" id="conversationDrawer"
+                   aria-labelledby="conversationDrawerLabel">
+
+                <div class="offcanvas-header border-bottom">
+                  <h2 class="offcanvas-title h6 mb-0" id="conversationDrawerLabel">Chats</h2>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                          data-bs-target="#conversationDrawer" aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body">
+
+                  <div class="p-3 border-bottom">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <h2 class="h6 mb-0 d-none d-md-block">Chats</h2>
+                      <button class="btn btn-sm btn-primary ms-auto" type="button"
+                              data-bs-toggle="modal" data-bs-target="#newMessageModal">
+                        <i class="bi bi-pencil-square me-1" aria-hidden="true"></i>New
+                      </button>
+                    </div>
+                    <form role="search" action="#" method="get">
+                      <label class="visually-hidden" for="chatSearch">Search conversations</label>
+                      <input type="search" class="form-control form-control-sm rounded-pill" id="chatSearch"
+                             name="q" placeholder="Search Messenger">
+                    </form>
+                  </div>
+
+                  <div class="flex-grow-1 overflow-auto p-2">
+                    <ul class="list-group list-group-flush conversation-list mb-0">
+
+                      <li class="list-group-item active d-flex align-items-center gap-2" aria-current="true">
+                        <span class="presence presence--online">
+                          <img class="avatar" src="assets/img/avatar-3.svg" alt=""><span class="presence__dot"></span>
+                        </span>
+                        <span class="flex-grow-1 min-w-0">
+                          <span class="d-flex justify-content-between gap-2">
+                            <span class="fw-semibold text-truncate">Maysam Chaalan</span>
+                            <small class="text-secondary flex-shrink-0"><time datetime="2026-09-14T10:24">10:24</time></small>
+                          </span>
+                          <span class="d-block small text-secondary text-truncate">Sounds good — see you at the studio!</span>
+                        </span>
+                      </li>
+
+                      <li class="list-group-item d-flex align-items-center gap-2 hover-surface position-relative">
+                        <span class="presence presence--online">
+                          <img class="avatar" src="assets/img/avatar-2.svg" alt=""><span class="presence__dot"></span>
+                        </span>
+                        <span class="flex-grow-1 min-w-0">
+                          <span class="d-flex justify-content-between gap-2">
+                            <a class="fw-semibold text-truncate text-body text-decoration-none stretched-link" href="#">Ali Nahleh</a>
+                            <small class="text-secondary flex-shrink-0"><time datetime="2026-09-14T09:51">09:51</time></small>
+                          </span>
+                          <span class="d-block small fw-semibold text-truncate">Sent you 2 photos</span>
+                        </span>
+                        <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+                        <span class="visually-hidden">Unread</span>
+                      </li>
+
+                      <li class="list-group-item d-flex align-items-center gap-2 hover-surface position-relative">
+                        <img class="avatar" src="assets/img/avatar-4.svg" alt="">
+                        <span class="flex-grow-1 min-w-0">
+                          <span class="d-flex justify-content-between gap-2">
+                            <a class="fw-semibold text-truncate text-body text-decoration-none stretched-link" href="#">Ali Ayoub</a>
+                            <small class="text-secondary flex-shrink-0"><time datetime="2026-09-14T08:12">08:12</time></small>
+                          </span>
+                          <span class="d-block small fw-semibold text-truncate">Can you review the spec today?</span>
+                        </span>
+                        <span class="unread-dot flex-shrink-0" aria-hidden="true"></span>
+                        <span class="visually-hidden">Unread</span>
+                      </li>
+
+                      <li class="list-group-item d-flex align-items-center gap-2 hover-surface position-relative">
+                        <span class="presence presence--away">
+                          <img class="avatar" src="assets/img/avatar-7.svg" alt=""><span class="presence__dot"></span>
+                        </span>
+                        <span class="flex-grow-1 min-w-0">
+                          <span class="d-flex justify-content-between gap-2">
+                            <a class="fw-semibold text-truncate text-body text-decoration-none stretched-link" href="#">Elias Al Omar</a>
+                            <small class="text-secondary flex-shrink-0"><time datetime="2026-09-13">Yest.</time></small>
+                          </span>
+                          <span class="d-block small text-secondary text-truncate">You: I'll bring the tripod</span>
+                        </span>
+                      </li>
+
+                      <li class="list-group-item d-flex align-items-center gap-2 hover-surface position-relative">
+                        <img class="avatar" src="assets/img/avatar-8.svg" alt="">
+                        <span class="flex-grow-1 min-w-0">
+                          <span class="d-flex justify-content-between gap-2">
+                            <a class="fw-semibold text-truncate text-body text-decoration-none stretched-link" href="#">Haitham Ismail</a>
+                            <small class="text-secondary flex-shrink-0"><time datetime="2026-09-11">Fri</time></small>
+                          </span>
+                          <span class="d-block small text-secondary text-truncate">You: 😂 fair enough</span>
+                        </span>
+                      </li>
+
+                      <li class="list-group-item d-flex align-items-center gap-2 hover-surface position-relative">
+                        <img class="avatar" src="assets/img/avatar-5.svg" alt="">
+                        <span class="flex-grow-1 min-w-0">
+                          <span class="d-flex justify-content-between gap-2">
+                            <a class="fw-semibold text-truncate text-body text-decoration-none stretched-link" href="#">Elie Amin</a>
+                            <small class="text-secondary flex-shrink-0"><time datetime="2026-09-09">Wed</time></small>
+                          </span>
+                          <span class="d-block small text-secondary text-truncate">Thanks for the intro!</span>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Active thread ===== -->
+            <div class="col-md-7 col-lg-8 d-flex flex-column h-100">
+
+              <header class="d-flex align-items-center gap-2 p-2 p-sm-3 border-bottom">
+                <button class="btn btn-light d-md-none" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#conversationDrawer" aria-controls="conversationDrawer" aria-label="Show conversations">
+                  <i class="bi bi-list" aria-hidden="true"></i>
+                </button>
+
+                <a class="d-flex align-items-center gap-2 text-decoration-none text-body min-w-0 flex-grow-1" href="profile.html">
+                  <span class="presence presence--online">
+                    <img class="avatar" src="assets/img/avatar-3.svg" alt=""><span class="presence__dot"></span>
+                  </span>
+                  <span class="min-w-0">
+                    <span class="d-block fw-semibold text-truncate">Maysam Chaalan</span>
+                    <small class="text-success">Active now</small>
+                  </span>
+                </a>
+
+                <div class="dropdown">
+                  <button class="icon-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Conversation options">
+                    <i class="bi bi-info-circle" aria-hidden="true"></i>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                    <li><a class="dropdown-item" href="profile.html"><i class="bi bi-person me-2" aria-hidden="true"></i>View profile</a></li>
+                    <li><button class="dropdown-item" type="button"><i class="bi bi-search me-2" aria-hidden="true"></i>Search in conversation</button></li>
+                    <li><button class="dropdown-item" type="button"><i class="bi bi-bell-slash me-2" aria-hidden="true"></i>Mute notifications</button></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-slash-circle me-2" aria-hidden="true"></i>Block</button></li>
+                  </ul>
+                </div>
+              </header>
+
+              <div class="chat-scroll">
+
+                <p class="text-center small text-secondary my-3">
+                  <time datetime="2026-09-14">Today</time>
+                </p>
+
+                <div class="msg msg--in">
+                  <img class="avatar avatar-sm align-self-end" src="assets/img/avatar-3.svg" alt="Maysam Chaalan">
+                  <div>
+                    <div class="msg__bubble">Morning! Did the swatches arrive?</div>
+                    <div class="msg__meta mt-1"><time datetime="2026-09-14T09:02">09:02</time></div>
+                  </div>
+                </div>
+
+                <div class="msg msg--out">
+                  <div>
+                    <div class="msg__bubble">They did — all six. The amber is even better in print than on screen.</div>
+                    <div class="msg__meta mt-1 text-end"><time datetime="2026-09-14T09:05">09:05</time> · Seen</div>
+                  </div>
+                </div>
+
+                <div class="msg msg--out">
+                  <div>
+                    <div class="msg__bubble p-1 overflow-hidden">
+                      <img class="rounded" src="assets/img/photo-1.svg" alt="Amber swatch photographed on a desk" width="240">
+                    </div>
+                    <div class="msg__meta mt-1 text-end"><time datetime="2026-09-14T09:06">09:06</time></div>
+                  </div>
+                </div>
+
+                <div class="msg msg--in">
+                  <img class="avatar avatar-sm align-self-end" src="assets/img/avatar-3.svg" alt="Maysam Chaalan">
+                  <div>
+                    <div class="msg__bubble">Oh that's gorgeous. Can we get it on the cover stock too?</div>
+                    <div class="msg__meta mt-1"><time datetime="2026-09-14T09:11">09:11</time></div>
+                  </div>
+                </div>
+
+                <div class="msg msg--out">
+                  <div>
+                    <div class="msg__bubble">Already ordered. Should land Thursday.</div>
+                    <div class="msg__meta mt-1 text-end"><time datetime="2026-09-14T10:20">10:20</time> · Seen</div>
+                  </div>
+                </div>
+
+                <div class="msg msg--in">
+                  <img class="avatar avatar-sm align-self-end" src="assets/img/avatar-3.svg" alt="Maysam Chaalan">
+                  <div>
+                    <div class="msg__bubble">Sounds good — see you at the studio!</div>
+                    <div class="msg__meta mt-1"><time datetime="2026-09-14T10:24">10:24</time></div>
+                  </div>
+                </div>
+
+                <div class="msg msg--in">
+                  <img class="avatar avatar-sm align-self-end" src="assets/img/avatar-3.svg" alt="">
+                  <div class="msg__bubble py-2">
+                    <span class="typing" role="status" aria-label="Maysam Chaalan is typing">
+                      <span></span><span></span><span></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <form class="d-flex align-items-end gap-1 gap-sm-2 p-2 p-sm-3 border-top" action="#" method="post" enctype="multipart/form-data">
+                <div class="position-relative">
+                  <button class="icon-btn" type="button" aria-label="Attach a photo"><i class="bi bi-image" aria-hidden="true"></i></button>
+                  <label class="visually-hidden" for="chatAttachment">Attach a photo</label>
+                  <input class="position-absolute top-0 start-0 w-100 h-100 opacity-0" type="file" id="chatAttachment" name="attachment" accept="image/*">
+                </div>
+                <button class="icon-btn d-none d-sm-inline-flex" type="button" aria-label="Attach a file"><i class="bi bi-paperclip" aria-hidden="true"></i></button>
+
+                <label class="visually-hidden" for="chatInput">Write a message to Maysam Chaalan</label>
+                <textarea class="form-control rounded-4" id="chatInput" name="message" rows="1"
+                          placeholder="Write a message…"></textarea>
+
+                <button class="icon-btn d-none d-sm-inline-flex" type="button" aria-label="Add an emoji"><i class="bi bi-emoji-smile" aria-hidden="true"></i></button>
+                <button class="btn btn-primary rounded-circle btn-icon" type="submit" aria-label="Send message">
+                  <i class="bi bi-send-fill" aria-hidden="true"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ===================== New message dialog ===================== -->
+  <div class="modal fade" role="dialog" id="newMessageModal" tabindex="-1" aria-labelledby="newMessageLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <form class="modal-content" action="#" method="post">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="newMessageLabel">New message</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label" for="messageTo">To</label>
+            <input type="text" class="form-control" id="messageTo" name="to" list="friendNames"
+                   placeholder="Type a name" autocomplete="off" required>
+            <datalist id="friendNames">
+              <option value="Ali Nahleh"></option>
+              <option value="Maysam Chaalan"></option>
+              <option value="Elias Al Omar"></option>
+              <option value="Haitham Ismail"></option>
+              <option value="Ali Ayoub"></option>
+              <option value="Elie Amin"></option>
+              <option value="Baqer Alayyan"></option>
+            </datalist>
+          </div>
+
+          <div>
+            <label class="form-label" for="messageBody">Message</label>
+            <textarea class="form-control" id="messageBody" name="body" rows="3" placeholder="Say hello…" required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary px-4">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== Mobile tab bar ===================== -->
+  <nav class="tab-bar d-lg-none" aria-label="Primary (compact)">
+    <a class="tab-bar__item" href="index.html"><i class="bi bi-house-door" aria-hidden="true"></i><span>Feed</span></a>
+    <a class="tab-bar__item" href="friends.html"><i class="bi bi-people" aria-hidden="true"></i><span>Friends</span></a>
+    <button class="tab-bar__item border-0 bg-transparent" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+      <i class="bi bi-plus-square text-brand" aria-hidden="true"></i><span>Post</span>
+    </button>
+    <a class="tab-bar__item active" href="messages.html"><i class="bi bi-chat-dots" aria-hidden="true"></i><span>Chats</span></a>
+    <a class="tab-bar__item" href="notifications.html"><i class="bi bi-bell" aria-hidden="true"></i><span>Alerts</span></a>
+  </nav>  <!-- ===================== Create post dialog ===================== -->
+  <div class="modal fade" role="dialog" id="createPostModal" tabindex="-1" aria-labelledby="createPostLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <form class="modal-content" action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="createPostLabel">Create post</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <img class="avatar" src="assets/img/avatar-1.svg" alt="">
+            <div>
+              <p class="fw-semibold mb-1">Hasan Nahleh</p>
+              <label class="visually-hidden" for="postAudience">Who can see this post</label>
+              <select class="form-select form-select-sm w-auto" id="postAudience" name="audience">
+                <option value="public" selected>🌐 Public</option>
+                <option value="friends">👥 Friends</option>
+                <option value="friends-except">👥 Friends except…</option>
+                <option value="only-me">🔒 Only me</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="visually-hidden" for="postBody">Post text</label>
+          <textarea class="form-control border-0 fs-5 mb-3" id="postBody" name="body" rows="4"
+                    placeholder="What's on your mind, Hasan?"></textarea>
+
+          <div class="dropzone position-relative">
+            <i class="bi bi-image fs-2" aria-hidden="true"></i>
+            <span class="fw-semibold text-body">Add a photo or video</span>
+            <small>One file per post · or drag and drop it here</small>
+            <label class="visually-hidden" for="postMedia">Attach a photo or video</label>
+            <input type="file" id="postMedia" name="media" accept="image/*,video/*">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Save draft</button>
+          <button type="submit" class="btn btn-primary px-4">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================== Upload photos dialog ===================== -->
+  <div class="modal fade" role="dialog" id="uploadPhotoModal" tabindex="-1" aria-labelledby="uploadPhotoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <form class="modal-content" action="#" method="post" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="uploadPhotoLabel">Upload a photo</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="dropzone position-relative mb-3">
+            <i class="bi bi-cloud-arrow-up fs-2" aria-hidden="true"></i>
+            <span class="fw-semibold text-body">Choose a photo to upload</span>
+            <small>JPG, PNG, GIF or WebP · up to 20 MB</small>
+            <label class="visually-hidden" for="photoFiles">Choose a photo</label>
+            <input type="file" id="photoFiles" name="photo" accept="image/*" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="photoAlbum">Album</label>
+            <select class="form-select" id="photoAlbum" name="album">
+              <option value="timeline" selected>Timeline photos</option>
+              <option value="travel">Travel 2026</option>
+              <option value="studio">Studio work</option>
+              <option value="new">➕ Create new album…</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="photoCaption">Caption</label>
+            <textarea class="form-control" id="photoCaption" name="caption" rows="2" placeholder="Say something about this photo…"></textarea>
+          </div>
+
+          <div class="mb-1">
+            <label class="form-label" for="photoAlt">Alternative text</label>
+            <input type="text" class="form-control" id="photoAlt" name="alt" placeholder="Describe the photo for screen readers">
+            <div class="form-text">Good alt text keeps your photos readable for everyone.</div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary px-4">Upload</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>
