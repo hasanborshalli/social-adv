@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\FriendRequestAudience;
 use App\Enums\PrivacyStatus;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -14,7 +15,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 
-#[Fillable(['name', 'username', 'email', 'password', 'bio', 'work', 'education', 'city', 'website', 'birthday', 'profile_pic', 'cover_photo', 'privacy_status'])]
+#[Fillable(['name', 'username', 'email', 'phone', 'password', 'bio', 'work', 'education', 'city', 'website', 'birthday', 'profile_pic', 'cover_photo', 'privacy_status', 'friend_request_audience'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -33,6 +34,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'birthday' => 'date',
             'privacy_status' => PrivacyStatus::class,
+            'friend_request_audience' => FriendRequestAudience::class,
         ];
     }
 

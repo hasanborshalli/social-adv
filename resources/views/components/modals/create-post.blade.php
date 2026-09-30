@@ -17,6 +17,7 @@
             <select class="form-select form-select-sm w-auto" id="postPrivacyStatus" name="privacy_status">
               @php $privacyStatus = old('privacy_status', auth()->user()?->privacy_status?->value); @endphp
               <option value="public" @selected($privacyStatus === 'public')>🌐 Public</option>
+              <option value="friends" @selected($privacyStatus === 'friends')>👥 Friends</option>
               <option value="private" @selected($privacyStatus === 'private')>🔒 Only me</option>
             </select>
             @error('privacy_status')

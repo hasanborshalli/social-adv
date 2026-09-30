@@ -69,12 +69,9 @@ class AuthController extends Controller
         return redirect()->route('feed');
     }
 
-    public function logout(Request $request): RedirectResponse
+    public function logout(): RedirectResponse
     {
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        logout_user();
 
         return redirect()->route('login');
     }
