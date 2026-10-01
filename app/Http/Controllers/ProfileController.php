@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function show(Request $request, User $user): View
+    {
+        return view('profile', [
+            'user' => $user,
+            'posts' => $user->posts()->latest()->get(),
+            'isOwnProfile' => $request->user()?->is($user) ?? false,
+        ]);
+    }
+
     public function updatePicture(Request $request): RedirectResponse
     {
         $request->validate([

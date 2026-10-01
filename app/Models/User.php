@@ -37,12 +37,39 @@ class User extends Authenticatable
             'friend_request_audience' => FriendRequestAudience::class,
         ];
     }
+    
+    // Relationships
+    public function friendRequestsRecieved(): HasMany
+    {
+        return $this->hasMany(FriendRequest::class, 'receiver_id');
+    }
+    public function friendRequestsSent(): HasMany
+    {
+        return $this->hasMany(FriendRequest::class, 'sender_id');
+    }
+    public function friends()
+    {
+        $friendsIds=$this->friendRequestsSent()->where('status', 'accepted')->pluck('receiver_id')
+        ->merge($this->friendRequestsRecieved()->where('status', 'accepted')->pluck('sender_id'));
+        return User::whereIn('id', $friendsIds);
+    }
+    public function isFriendWith(User $user): bool
+    {
+        return $this->friends()->where('id', $user->id)->exists();
+    }
 
-    public function posts(): HasMany
+    public function isRequestSentTo(User $user): bool
+    {
+        return $this->friendRequestsSent()->where('receiver_id', $user->id)->where('status', 'pending')->exists();
+    }
+    public function isRequestReceivedFrom(User $user): bool
+    {
+        return $this->friendRequestsRecieved()->where('sender_id', $user->id)->where('status', 'pending')->exists();
+    }   
+        public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
-
     protected function profilePictureUrl(): Attribute
     {
         return Attribute::make(

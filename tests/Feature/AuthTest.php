@@ -141,7 +141,7 @@ class AuthTest extends TestCase
     #[DataProvider('protectedRoutes')]
     public function test_authenticated_users_can_visit_protected_routes(string $routeName): void
     {
-        $response = $this->actingAs(User::factory()->create())->get(route($routeName));
+        $response = $this->actingAs(User::factory()->create())->followingRedirects()->get(route($routeName));
 
         $response->assertOk();
     }

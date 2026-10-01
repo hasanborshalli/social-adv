@@ -1,52 +1,64 @@
-<x-layouts.app title="Hasan Nahleh · YouBee Social">
+<x-layouts.app :title="$user->name.' · YouBee Social'">
 
   <!-- ===== Profile header ===== -->
   <section class="card mb-3 overflow-hidden" aria-labelledby="profileName">
 
     <div class="position-relative">
-      <img class="cover" src="{{ auth()->user()->cover_photo_url }}" alt="Hasan Nahleh's cover photo">
-      <button class="btn btn-light btn-sm position-absolute bottom-0 end-0 m-3 shadow-sm"
-              type="button" data-bs-toggle="modal" data-bs-target="#changeCoverModal">
-        <i class="bi bi-camera me-1" aria-hidden="true"></i>Edit cover
-      </button>
+      <img class="cover" src="{{ $user->cover_photo_url }}" alt="{{ $user->name }}'s cover photo">
+      @if ($isOwnProfile)
+        <button class="btn btn-light btn-sm position-absolute bottom-0 end-0 m-3 shadow-sm"
+                type="button" data-bs-toggle="modal" data-bs-target="#changeCoverModal">
+          <i class="bi bi-camera me-1" aria-hidden="true"></i>Edit cover
+        </button>
+      @endif
     </div>
 
     <div class="card-body">
       <div class="d-flex flex-column flex-md-row align-items-center align-items-md-end gap-3 profile-identity">
 
         <div class="profile-avatar-wrap position-relative">
-          <img class="avatar avatar-2xl profile-avatar" src="{{ auth()->user()->profile_picture_url }}" alt="Hasan Nahleh">
-          <button class="btn btn-light btn-sm rounded-circle position-absolute bottom-0 end-0 shadow-sm"
-                  type="button" data-bs-toggle="modal" data-bs-target="#changeAvatarModal"
-                  aria-label="Change profile picture" title="Change profile picture">
-            <i class="bi bi-camera-fill" aria-hidden="true"></i>
-          </button>
+          <img class="avatar avatar-2xl profile-avatar" src="{{ $user->profile_picture_url }}" alt="{{ $user->name }}">
+          @if ($isOwnProfile)
+            <button class="btn btn-light btn-sm rounded-circle position-absolute bottom-0 end-0 shadow-sm"
+                    type="button" data-bs-toggle="modal" data-bs-target="#changeAvatarModal"
+                    aria-label="Change profile picture" title="Change profile picture">
+              <i class="bi bi-camera-fill" aria-hidden="true"></i>
+            </button>
+          @endif
         </div>
 
         <div class="flex-grow-1 text-center text-md-start min-w-0">
-          <h1 class="h3 mb-1" id="profileName">Hasan Nahleh</h1>
-          <p class="text-secondary mb-2">@hasann · Product designer at Hivework</p>
+          <h1 class="h3 mb-1" id="profileName">{{ $user->name }}</h1>
+          <p class="text-secondary mb-2">{{ '@'.$user->username }}@if ($user->work) · {{ $user->work }}@endif</p>
           <div class="d-flex justify-content-center justify-content-md-start gap-4">
             <span class="stat-block"><strong>486</strong><small class="text-secondary">Friends</small></span>
             <span class="stat-block"><strong>1,204</strong><small class="text-secondary">Followers</small></span>
-            <span class="stat-block"><strong>312</strong><small class="text-secondary">Posts</small></span>
+            <span class="stat-block"><strong>{{ number_format($posts->count()) }}</strong><small class="text-secondary">Posts</small></span>
           </div>
         </div>
 
         <div class="d-flex flex-wrap justify-content-center gap-2">
-          <a class="btn btn-primary" href="{{ route('settings') }}">
-            <i class="bi bi-pencil me-1" aria-hidden="true"></i>Edit profile
-          </a>
+          @if ($isOwnProfile)
+            <a class="btn btn-primary" href="{{ route('settings') }}">
+              <i class="bi bi-pencil me-1" aria-hidden="true"></i>Edit profile
+            </a>
+          @else
+            <livewire:add-friend :target="$user" />
+          @endif
           <div class="dropdown">
             <button class="btn btn-light" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="More profile actions">
               <i class="bi bi-three-dots" aria-hidden="true"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-              <li><a class="dropdown-item" href="{{ route('settings') }}"><i class="bi bi-pencil me-2" aria-hidden="true"></i>Edit profile</a></li>
+              @if ($isOwnProfile)
+                <li><a class="dropdown-item" href="{{ route('settings') }}"><i class="bi bi-pencil me-2" aria-hidden="true"></i>Edit profile</a></li>
+              @endif
               <li><button class="dropdown-item" type="button"><i class="bi bi-share me-2" aria-hidden="true"></i>Share profile</button></li>
               <li><button class="dropdown-item" type="button"><i class="bi bi-link-45deg me-2" aria-hidden="true"></i>Copy link</button></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-slash-circle me-2" aria-hidden="true"></i>Block</button></li>
+              @unless ($isOwnProfile)
+                <li><hr class="dropdown-divider"></li>
+                <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-slash-circle me-2" aria-hidden="true"></i>Block</button></li>
+              @endunless
             </ul>
           </div>
         </div>
@@ -86,16 +98,27 @@
           <section class="card mb-3" aria-labelledby="introHeading">
             <div class="card-body">
               <h2 class="h6 mb-3" id="introHeading">Intro</h2>
-              <p class="text-center text-balance">Designing calmer software. Bikes, film cameras, and too many notebooks.</p>
+              @if ($user->bio)
+                <p class="text-center text-balance">{{ $user->bio }}</p>
+              @endif
               <ul class="list-unstyled vstack gap-2 small mb-3">
-                <li><i class="bi bi-briefcase text-secondary me-2" aria-hidden="true"></i>Product designer at <strong>Hivework</strong></li>
-                <li><i class="bi bi-mortarboard text-secondary me-2" aria-hidden="true"></i>Studied at <strong>Central Saint Martins</strong></li>
-                <li><i class="bi bi-geo-alt text-secondary me-2" aria-hidden="true"></i>Lives in <strong>Manchester, UK</strong></li>
-                <li><i class="bi bi-house text-secondary me-2" aria-hidden="true"></i>From <strong>Lagos, Nigeria</strong></li>
-                <li><i class="bi bi-link-45deg text-secondary me-2" aria-hidden="true"></i><a class="link-muted" href="#">hasann.design</a></li>
-                <li><i class="bi bi-calendar3 text-secondary me-2" aria-hidden="true"></i>Joined <time datetime="2019-03">March 2019</time></li>
+                @if ($user->work)
+                  <li><i class="bi bi-briefcase text-secondary me-2" aria-hidden="true"></i>Works at <strong>{{ $user->work }}</strong></li>
+                @endif
+                @if ($user->education)
+                  <li><i class="bi bi-mortarboard text-secondary me-2" aria-hidden="true"></i>Studied at <strong>{{ $user->education }}</strong></li>
+                @endif
+                @if ($user->city)
+                  <li><i class="bi bi-geo-alt text-secondary me-2" aria-hidden="true"></i>Lives in <strong>{{ $user->city }}</strong></li>
+                @endif
+                @if ($user->website)
+                  <li><i class="bi bi-link-45deg text-secondary me-2" aria-hidden="true"></i><a class="link-muted" href="{{ $user->website }}" target="_blank" rel="noopener noreferrer">{{ $user->website }}</a></li>
+                @endif
+                <li><i class="bi bi-calendar3 text-secondary me-2" aria-hidden="true"></i>Joined <time datetime="{{ $user->created_at->format('Y-m') }}">{{ $user->created_at->format('F Y') }}</time></li>
               </ul>
-              <button class="btn btn-light w-100" type="button">Edit details</button>
+              @if ($isOwnProfile)
+                <a class="btn btn-light w-100" href="{{ route('settings') }}">Edit details</a>
+              @endif
             </div>
           </section>
 
@@ -103,9 +126,11 @@
             <div class="card-body">
               <div class="d-flex align-items-center justify-content-between mb-3">
                 <h2 class="h6 mb-0" id="photosPreviewHeading">Photos</h2>
-                <button class="btn btn-sm btn-light" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                  <i class="bi bi-upload me-1" aria-hidden="true"></i>Upload
-                </button>
+                @if ($isOwnProfile)
+                  <button class="btn btn-sm btn-light" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                    <i class="bi bi-upload me-1" aria-hidden="true"></i>Upload
+                  </button>
+                @endif
               </div>
               <div class="row g-1">
                 <div class="col-4"><a class="photo-tile" href="#"><img src="{{ asset('assets/img/photo-1.svg') }}" alt="Amber gradient study"></a></div>
@@ -155,107 +180,94 @@
         </div>
 
         <div class="col-12 col-lg-7">
-          <section class="card mb-3" aria-labelledby="profileComposerHeading">
-            <div class="card-body">
-              <h2 class="visually-hidden" id="profileComposerHeading">Create a post</h2>
-              <div class="d-flex align-items-center gap-2">
-                <img class="avatar" src="{{ auth()->user()->profile_picture_url }}" alt="">
-                <button class="composer-trigger" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                  What's on your mind, Hasan?
-                </button>
-              </div>
-              <hr class="my-3">
-              <div class="d-flex flex-wrap gap-1">
-                <button class="btn btn-light flex-fill" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                  <i class="bi bi-image text-success me-1" aria-hidden="true"></i>Photo
-                </button>
-                <button class="btn btn-light flex-fill" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
-                  <i class="bi bi-camera-video text-danger me-1" aria-hidden="true"></i>Video
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <article class="card mb-3">
-            <h2 class="visually-hidden">Post by Hasan Nahleh</h2>
-            <div class="card-body pb-2">
-              <header class="d-flex align-items-start gap-2 mb-2">
-                <img class="avatar" src="{{ asset('assets/img/avatar-1.svg') }}" alt="Hasan Nahleh">
-                <div class="flex-grow-1 min-w-0">
-                  <p class="mb-0"><span class="fw-semibold">Hasan Nahleh</span></p>
-                  <p class="small text-secondary mb-0">
-                    <time datetime="2026-09-12T11:30">2 days ago</time> ·
-                    <i class="bi bi-globe-americas" aria-hidden="true"></i> Public
-                  </p>
-                </div>
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-light border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Post options">
-                    <i class="bi bi-three-dots" aria-hidden="true"></i>
+          @if ($isOwnProfile)
+            <section class="card mb-3" aria-labelledby="profileComposerHeading">
+              <div class="card-body">
+                <h2 class="visually-hidden" id="profileComposerHeading">Create a post</h2>
+                <div class="d-flex align-items-center gap-2">
+                  <img class="avatar" src="{{ $user->profile_picture_url }}" alt="">
+                  <button class="composer-trigger" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                    What's on your mind, {{ Str::before($user->name, ' ') }}?
                   </button>
-                  <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-                    <li><button class="dropdown-item" type="button"><i class="bi bi-pin-angle me-2" aria-hidden="true"></i>Pin to profile</button></li>
-                    <li><button class="dropdown-item" type="button"><i class="bi bi-pencil me-2" aria-hidden="true"></i>Edit post</button></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-trash me-2" aria-hidden="true"></i>Delete</button></li>
-                  </ul>
                 </div>
-              </header>
-              <p class="mb-0">
-                Spent the morning rebuilding our type scale from scratch. Four sizes instead of eleven.
-                Nobody has noticed, which is exactly the point.
-              </p>
-            </div>
-
-            <a class="post-photo" href="#">
-              <img src="{{ asset('assets/img/photo-1.svg') }}" alt="Type scale specimen sheet">
-            </a>
-
-            <div class="card-body">
-              <div class="d-flex align-items-center justify-content-between small text-secondary">
-                <span>
-                  <span>203 likes</span>
-                </span>
-                <span><a class="link-muted" href="#">31 comments</a></span>
-              </div>
-              <hr class="my-2">
-              <div class="btn-group w-100 post-actions" role="group" aria-label="Post actions">
-                <button class="btn" type="button"><i class="bi bi-hand-thumbs-up me-1" aria-hidden="true"></i>Like</button>
-                <button class="btn" type="button"><i class="bi bi-chat me-1" aria-hidden="true"></i>Comment</button>
-                <button class="btn" type="button"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="card mb-3">
-            <h2 class="visually-hidden">Post by Hasan Nahleh</h2>
-            <div class="card-body pb-2">
-              <header class="d-flex align-items-start gap-2 mb-2">
-                <img class="avatar" src="{{ asset('assets/img/avatar-1.svg') }}" alt="Hasan Nahleh">
-                <div class="flex-grow-1 min-w-0">
-                  <p class="mb-0"><span class="fw-semibold">Hasan Nahleh</span></p>
-                  <p class="small text-secondary mb-0">
-                    <time datetime="2026-09-08T19:15">6 days ago</time> ·
-                    <i class="bi bi-people-fill" aria-hidden="true"></i> Friends
-                  </p>
+                <hr class="my-3">
+                <div class="d-flex flex-wrap gap-1">
+                  <button class="btn btn-light flex-fill" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                    <i class="bi bi-image text-success me-1" aria-hidden="true"></i>Photo
+                  </button>
+                  <button class="btn btn-light flex-fill" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                    <i class="bi bi-camera-video text-danger me-1" aria-hidden="true"></i>Video
+                  </button>
                 </div>
-              </header>
-              <p class="fs-5 mb-0">
-                Unpopular opinion: most design systems fail at documentation, not components.
-              </p>
-            </div>
-            <div class="card-body pt-3">
-              <div class="d-flex align-items-center justify-content-between small text-secondary">
-                <span>78 likes</span>
-                <span><a class="link-muted" href="#">19 comments</a></span>
               </div>
-              <hr class="my-2">
-              <div class="btn-group w-100 post-actions" role="group" aria-label="Post actions">
-                <button class="btn" type="button"><i class="bi bi-hand-thumbs-up me-1" aria-hidden="true"></i>Like</button>
-                <button class="btn" type="button"><i class="bi bi-chat me-1" aria-hidden="true"></i>Comment</button>
-                <button class="btn" type="button"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
+            </section>
+          @endif
+
+          @forelse ($posts as $post)
+            <article class="card mb-3">
+              <h2 class="visually-hidden">Post by {{ $user->name }}</h2>
+              <div class="card-body pb-2">
+                <header class="d-flex align-items-start gap-2 mb-2">
+                  <img class="avatar" src="{{ $user->profile_picture_url }}" alt="{{ $user->name }}">
+                  <div class="flex-grow-1 min-w-0">
+                    <p class="mb-0"><span class="fw-semibold">{{ $user->name }}</span></p>
+                    <p class="small text-secondary mb-0">
+                      <time datetime="{{ $post->created_at->toIso8601String() }}">{{ $post->created_at->diffForHumans() }}</time> ·
+                      @switch($post->privacy_status)
+                        @case(\App\Enums\PrivacyStatus::Friends)
+                          <i class="bi bi-people-fill" aria-hidden="true"></i> Friends
+                          @break
+                        @case(\App\Enums\PrivacyStatus::Private)
+                          <i class="bi bi-lock-fill" aria-hidden="true"></i> Only me
+                          @break
+                        @default
+                          <i class="bi bi-globe-americas" aria-hidden="true"></i> Public
+                      @endswitch
+                    </p>
+                  </div>
+                  @if ($isOwnProfile)
+                    <div class="dropdown">
+                      <button class="btn btn-sm btn-light border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Post options">
+                        <i class="bi bi-three-dots" aria-hidden="true"></i>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                        <li><button class="dropdown-item" type="button"><i class="bi bi-pin-angle me-2" aria-hidden="true"></i>Pin to profile</button></li>
+                        <li><button class="dropdown-item" type="button"><i class="bi bi-pencil me-2" aria-hidden="true"></i>Edit post</button></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-trash me-2" aria-hidden="true"></i>Delete</button></li>
+                      </ul>
+                    </div>
+                  @endif
+                </header>
+                @if ($post->body)
+                  <p class="mb-0 text-break" style="white-space: pre-line">{{ $post->body }}</p>
+                @endif
               </div>
-            </div>
-          </article>
+
+              @if ($post->media_type === 'image')
+                <a class="post-photo" href="{{ $post->media_url }}">
+                  <img src="{{ $post->media_url }}" alt="Photo posted by {{ $user->name }}">
+                </a>
+              @elseif ($post->media_type === 'video')
+                <video class="w-100 d-block bg-black" src="{{ $post->media_url }}" controls preload="metadata"></video>
+              @endif
+
+              <div class="card-body">
+                <div class="btn-group w-100 post-actions" role="group" aria-label="Post actions">
+                  <button class="btn" type="button"><i class="bi bi-hand-thumbs-up me-1" aria-hidden="true"></i>Like</button>
+                  <button class="btn" type="button"><i class="bi bi-chat me-1" aria-hidden="true"></i>Comment</button>
+                  <button class="btn" type="button"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
+                </div>
+              </div>
+            </article>
+          @empty
+            <section class="card mb-3">
+              <div class="card-body text-center text-secondary py-5">
+                <i class="bi bi-journal-text fs-2 d-block mb-2" aria-hidden="true"></i>
+                No posts yet.
+              </div>
+            </section>
+          @endforelse
         </div>
       </div>
     </div>
@@ -264,37 +276,45 @@
     <div class="tab-pane fade" id="panel-about" role="tabpanel" aria-labelledby="tab-about" tabindex="0">
       <div class="card">
         <div class="card-body">
-          <h2 class="h5 mb-4">About Hasan</h2>
+          <h2 class="h5 mb-4">About {{ Str::before($user->name, ' ') }}</h2>
 
-          <h3 class="h6 text-secondary">Work and education</h3>
-          <dl class="row mb-4">
-            <dt class="col-sm-4 fw-normal text-secondary">Current role</dt>
-            <dd class="col-sm-8">Product designer at Hivework · since 2022</dd>
-            <dt class="col-sm-4 fw-normal text-secondary">Previously</dt>
-            <dd class="col-sm-8">Design lead at Northbeam Studio · 2019–2022</dd>
-            <dt class="col-sm-4 fw-normal text-secondary">Education</dt>
-            <dd class="col-sm-8">BA Graphic Design, Central Saint Martins</dd>
-          </dl>
+          @if ($user->work || $user->education)
+            <h3 class="h6 text-secondary">Work and education</h3>
+            <dl class="row mb-4">
+              @if ($user->work)
+                <dt class="col-sm-4 fw-normal text-secondary">Work</dt>
+                <dd class="col-sm-8">{{ $user->work }}</dd>
+              @endif
+              @if ($user->education)
+                <dt class="col-sm-4 fw-normal text-secondary">Education</dt>
+                <dd class="col-sm-8">{{ $user->education }}</dd>
+              @endif
+            </dl>
+          @endif
 
-          <h3 class="h6 text-secondary">Places</h3>
-          <dl class="row mb-4">
-            <dt class="col-sm-4 fw-normal text-secondary">Lives in</dt>
-            <dd class="col-sm-8">Manchester, United Kingdom</dd>
-            <dt class="col-sm-4 fw-normal text-secondary">From</dt>
-            <dd class="col-sm-8">Lagos, Nigeria</dd>
-          </dl>
+          @if ($user->city)
+            <h3 class="h6 text-secondary">Places</h3>
+            <dl class="row mb-4">
+              <dt class="col-sm-4 fw-normal text-secondary">Lives in</dt>
+              <dd class="col-sm-8">{{ $user->city }}</dd>
+            </dl>
+          @endif
 
           <h3 class="h6 text-secondary">Contact and basic info</h3>
           <dl class="row mb-4">
-            <dt class="col-sm-4 fw-normal text-secondary">Website</dt>
-            <dd class="col-sm-8"><a class="link-muted" href="#">hasann.design</a></dd>
+            @if ($user->website)
+              <dt class="col-sm-4 fw-normal text-secondary">Website</dt>
+              <dd class="col-sm-8"><a class="link-muted" href="{{ $user->website }}" target="_blank" rel="noopener noreferrer">{{ $user->website }}</a></dd>
+            @endif
             <dt class="col-sm-4 fw-normal text-secondary">Joined</dt>
-            <dd class="col-sm-8"><time datetime="2019-03-14">14 March 2019</time></dd>
+            <dd class="col-sm-8"><time datetime="{{ $user->created_at->toDateString() }}">{{ $user->created_at->format('j F Y') }}</time></dd>
           </dl>
 
-          <a class="btn btn-light" href="{{ route('settings') }}">
-            <i class="bi bi-pencil me-1" aria-hidden="true"></i>Edit about section
-          </a>
+          @if ($isOwnProfile)
+            <a class="btn btn-light" href="{{ route('settings') }}">
+              <i class="bi bi-pencil me-1" aria-hidden="true"></i>Edit about section
+            </a>
+          @endif
         </div>
       </div>
     </div>
@@ -367,9 +387,11 @@
         <div class="card-body">
           <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
             <h2 class="h5 mb-0">Photos</h2>
-            <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
-              <i class="bi bi-upload me-1" aria-hidden="true"></i>Upload photo
-            </button>
+            @if ($isOwnProfile)
+              <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#createPostModal">
+                <i class="bi bi-upload me-1" aria-hidden="true"></i>Upload photo
+              </button>
+            @endif
           </div>
 
           <ul class="nav nav-pills gap-2 mb-3" aria-label="Photo collections">
@@ -396,6 +418,8 @@
     </div>
   </div>
 
-  <x-modals.change-avatar />
-  <x-modals.change-cover />
+  @if ($isOwnProfile)
+    <x-modals.change-avatar />
+    <x-modals.change-cover />
+  @endif
 </x-layouts.app>

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -11,6 +12,75 @@ use Tests\TestCase;
 class ProfileTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_profile_shortcut_redirects_to_the_users_own_profile(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('profile'));
+
+        $response->assertRedirect(route('profile.show', $user));
+    }
+
+    public function test_users_can_view_their_own_profile_with_edit_controls(): void
+    {
+        $user = User::factory()->create(['name' => 'Jane Doe']);
+
+        $response = $this->actingAs($user)->get(route('profile.show', $user));
+
+        $response->assertOk();
+        $response->assertSee('Jane Doe');
+        $response->assertSee('Edit profile');
+        $response->assertSee('Edit cover');
+        $response->assertSee('Edit details');
+    }
+
+    public function test_users_viewing_another_profile_do_not_see_edit_controls(): void
+    {
+        $viewer = User::factory()->create();
+        $profileOwner = User::factory()->create(['name' => 'John Smith']);
+
+        $response = $this->actingAs($viewer)->get(route('profile.show', $profileOwner));
+
+        $response->assertOk();
+        $response->assertSee('John Smith');
+        $response->assertDontSee('Edit profile');
+        $response->assertDontSee('Edit cover');
+        $response->assertDontSee('Edit details');
+    }
+
+    public function test_guests_can_view_a_profile_without_edit_controls(): void
+    {
+        $profileOwner = User::factory()->create(['name' => 'John Smith']);
+
+        $response = $this->get(route('profile.show', $profileOwner));
+
+        $response->assertOk();
+        $response->assertSee('John Smith');
+        $response->assertDontSee('Edit profile');
+    }
+
+    public function test_profile_displays_all_of_the_users_posts_regardless_of_privacy(): void
+    {
+        $profileOwner = User::factory()->create();
+        Post::factory()->for($profileOwner)->create(['body' => 'A public post']);
+        Post::factory()->for($profileOwner)->private()->create(['body' => 'A private post']);
+        Post::factory()->create(['body' => 'Someone else entirely']);
+
+        $response = $this->actingAs(User::factory()->create())->get(route('profile.show', $profileOwner));
+
+        $response->assertOk();
+        $response->assertSee('A public post');
+        $response->assertSee('A private post');
+        $response->assertDontSee('Someone else entirely');
+    }
+
+    public function test_viewing_a_nonexistent_profile_returns_not_found(): void
+    {
+        $response = $this->get(route('profile.show', 'does-not-exist'));
+
+        $response->assertNotFound();
+    }
 
     public function test_guests_cannot_update_the_profile_picture(): void
     {

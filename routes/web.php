@@ -11,7 +11,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {
-        return view('profile');
+        return to_route('profile.show', auth()->user());
     })->name('profile');
 
     Route::post('/profile/picture', [ProfileController::class, 'updatePicture'])->name('profile.picture.update');
@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
         return view('settings');
     })->name('settings');
 });
+
+Route::get('/profile/{user:username}', [ProfileController::class, 'show'])->name('profile.show');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
