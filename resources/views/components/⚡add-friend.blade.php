@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\FriendRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Locked;
@@ -22,10 +23,7 @@ new class extends Component
     public function addFriend(): void
     {
         $user = Auth::user();
-        if ($user->is($this->target) || $user->isFriendWith($this->target) || $user->isRequestSentTo($this->target) || $user->isRequestReceivedFrom($this->target)) {
-            $this->refreshState();
-            return;
-        }
+        $this->authorize('create', [FriendRequest::class, $this->target]);
 
         $user->friendRequestsSent()->create(['receiver_id' => $this->target->id]);
         $this->refreshState();
@@ -102,9 +100,11 @@ new class extends Component
     </button>
     @break
     @case('nothing')
+    @can('create', [\App\Models\FriendRequest::class, $target])
     <button class="btn btn-primary" type="button" wire:click="addFriend">
         <i class="bi bi-person-plus me-1" aria-hidden="true"></i>Add friend
     </button>
+    @endcan
     @break
     @endswitch
 </div>

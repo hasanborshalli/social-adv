@@ -37,39 +37,68 @@ class User extends Authenticatable
             'friend_request_audience' => FriendRequestAudience::class,
         ];
     }
-    
+
     // Relationships
     public function friendRequestsRecieved(): HasMany
     {
         return $this->hasMany(FriendRequest::class, 'receiver_id');
     }
+
     public function friendRequestsSent(): HasMany
     {
         return $this->hasMany(FriendRequest::class, 'sender_id');
     }
+
     public function friends()
     {
-        $friendsIds=$this->friendRequestsSent()->where('status', 'accepted')->pluck('receiver_id')
-        ->merge($this->friendRequestsRecieved()->where('status', 'accepted')->pluck('sender_id'));
+        $friendsIds = $this->friendRequestsSent()->where('status', 'accepted')->pluck('receiver_id')
+            ->merge($this->friendRequestsRecieved()->where('status', 'accepted')->pluck('sender_id'));
+
         return User::whereIn('id', $friendsIds);
     }
+
     public function isFriendWith(User $user): bool
     {
         return $this->friends()->where('id', $user->id)->exists();
+    }
+
+    public function hasMutual(User $user): bool
+    {
+        return $this->friends()->whereIn('id', $user->friends()->select('id'))->exists();
+    }
+
+    public function peopleYouMayKnow()
+    {
+        $friendsIds = $this->friends()->pluck('id');
+        $pendingIds = $this->friendRequestsSent()->where('status', 'pending')->pluck('receiver_id')
+            ->merge($this->friendRequestsRecieved()->where('status', 'pending')->pluck('sender_id'));
+        $untriedFriendIds = $friendsIds->shuffle();
+        $friends = collect();
+        $tries = 0;
+        while ($friends->count() < 3 && $tries < 3 && $untriedFriendIds->isNotEmpty()) {
+            $tries++;
+            $randomFriend = User::find($untriedFriendIds->shift());
+            $friends = $randomFriend->friends()->where('id', '!=', $this->id)->whereNotIn('id', $friendsIds)->whereNotIn('id', $pendingIds)->limit(3)->get();
+        }
+
+        return $friends;
     }
 
     public function isRequestSentTo(User $user): bool
     {
         return $this->friendRequestsSent()->where('receiver_id', $user->id)->where('status', 'pending')->exists();
     }
+
     public function isRequestReceivedFrom(User $user): bool
     {
         return $this->friendRequestsRecieved()->where('sender_id', $user->id)->where('status', 'pending')->exists();
-    }   
-        public function posts(): HasMany
+    }
+
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
+
     protected function profilePictureUrl(): Attribute
     {
         return Attribute::make(
