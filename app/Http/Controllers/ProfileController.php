@@ -14,7 +14,7 @@ class ProfileController extends Controller
     {
         return view('profile', [
             'user' => $user,
-            'posts' => $user->posts()->latest()->get(),
+            'posts' => $user->posts()->with(['user', 'sharedPost.user'])->withCount(['likes', 'shares'])->latest()->get(),
             'isOwnProfile' => $request->user()?->is($user) ?? false,
         ]);
     }

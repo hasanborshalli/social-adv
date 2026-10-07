@@ -61,6 +61,16 @@ class PostFactory extends Factory
     }
 
     /**
+     * Indicate that the post is a share of another post.
+     */
+    public function sharing(Post $post): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'shared_post_id' => $post->id,
+        ]);
+    }
+
+    /**
      * Indicate that the post has no text body.
      */
     public function withoutBody(): static

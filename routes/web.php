@@ -1,13 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('feed');
-})->name('feed');
+Route::get('/', [FeedController::class, 'index'])->name('feed');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {

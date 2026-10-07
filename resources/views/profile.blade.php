@@ -204,62 +204,7 @@
           @endif
 
           @forelse ($posts as $post)
-            <article class="card mb-3">
-              <h2 class="visually-hidden">Post by {{ $user->name }}</h2>
-              <div class="card-body pb-2">
-                <header class="d-flex align-items-start gap-2 mb-2">
-                  <img class="avatar" src="{{ $user->profile_picture_url }}" alt="{{ $user->name }}">
-                  <div class="flex-grow-1 min-w-0">
-                    <p class="mb-0"><span class="fw-semibold">{{ $user->name }}</span></p>
-                    <p class="small text-secondary mb-0">
-                      <time datetime="{{ $post->created_at->toIso8601String() }}">{{ $post->created_at->diffForHumans() }}</time> ·
-                      @switch($post->privacy_status)
-                        @case(\App\Enums\PrivacyStatus::Friends)
-                          <i class="bi bi-people-fill" aria-hidden="true"></i> Friends
-                          @break
-                        @case(\App\Enums\PrivacyStatus::Private)
-                          <i class="bi bi-lock-fill" aria-hidden="true"></i> Only me
-                          @break
-                        @default
-                          <i class="bi bi-globe-americas" aria-hidden="true"></i> Public
-                      @endswitch
-                    </p>
-                  </div>
-                  @if ($isOwnProfile)
-                    <div class="dropdown">
-                      <button class="btn btn-sm btn-light border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Post options">
-                        <i class="bi bi-three-dots" aria-hidden="true"></i>
-                      </button>
-                      <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-                        <li><button class="dropdown-item" type="button"><i class="bi bi-pin-angle me-2" aria-hidden="true"></i>Pin to profile</button></li>
-                        <li><button class="dropdown-item" type="button"><i class="bi bi-pencil me-2" aria-hidden="true"></i>Edit post</button></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><button class="dropdown-item text-danger" type="button"><i class="bi bi-trash me-2" aria-hidden="true"></i>Delete</button></li>
-                      </ul>
-                    </div>
-                  @endif
-                </header>
-                @if ($post->body)
-                  <p class="mb-0 text-break" style="white-space: pre-line">{{ $post->body }}</p>
-                @endif
-              </div>
-
-              @if ($post->media_type === 'image')
-                <a class="post-photo" href="{{ $post->media_url }}">
-                  <img src="{{ $post->media_url }}" alt="Photo posted by {{ $user->name }}">
-                </a>
-              @elseif ($post->media_type === 'video')
-                <video class="w-100 d-block bg-black" src="{{ $post->media_url }}" controls preload="metadata"></video>
-              @endif
-
-              <div class="card-body">
-                <div class="btn-group w-100 post-actions" role="group" aria-label="Post actions">
-                  <button class="btn" type="button"><i class="bi bi-hand-thumbs-up me-1" aria-hidden="true"></i>Like</button>
-                  <button class="btn" type="button"><i class="bi bi-chat me-1" aria-hidden="true"></i>Comment</button>
-                  <button class="btn" type="button"><i class="bi bi-share me-1" aria-hidden="true"></i>Share</button>
-                </div>
-              </div>
-            </article>
+            <x-post :post="$post" />
           @empty
             <section class="card mb-3">
               <div class="card-body text-center text-secondary py-5">

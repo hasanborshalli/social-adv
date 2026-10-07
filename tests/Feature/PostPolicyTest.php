@@ -71,4 +71,36 @@ class PostPolicyTest extends TestCase
 
         $this->assertFalse(Gate::forUser(null)->allows('view', $post));
     }
+
+    public function test_anyone_signed_in_can_like_a_public_post(): void
+    {
+        $post = Post::factory()->create();
+        $stranger = User::factory()->create();
+
+        $this->assertTrue($stranger->can('like', $post));
+    }
+
+    public function test_guests_cannot_like_a_public_post(): void
+    {
+        $post = Post::factory()->create();
+
+        $this->assertFalse(Gate::forUser(null)->allows('like', $post));
+    }
+
+    public function test_friends_can_like_a_private_post(): void
+    {
+        $post = Post::factory()->private()->create();
+        $friend = User::factory()->create();
+        $this->makeFriends($friend, $post->user);
+
+        $this->assertTrue($friend->can('like', $post));
+    }
+
+    public function test_strangers_cannot_like_a_private_post(): void
+    {
+        $post = Post::factory()->private()->create();
+        $stranger = User::factory()->create();
+
+        $this->assertFalse($stranger->can('like', $post));
+    }
 }
